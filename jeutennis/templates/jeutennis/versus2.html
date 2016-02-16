@@ -1,0 +1,12 @@
+<h1>{{ user.username }} </h1>
+{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="." method="post">
+   {% for x in list_joueurs %}
+   {% csrf_token %}
+       <input type="radio" name="match" id="{{ x }}" value="{{ x.id }}" />
+       <label for="Versus">{{ x }}</label><br/>
+   {% endfor %}
+<input type="submit" value="Match" />
+</form>

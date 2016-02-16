@@ -1,0 +1,14 @@
+<h1>{{ user.username }} </h1>
+{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if output %}
+<form action="." method="post">
+   {% for x in stats %}
+   {% csrf_token %}
+       <input type="radio" name="training" id="{{ x }}" value="{{ x }}" />
+       <label for="Service">{{ x }}</label><br/>
+   {% endfor %}
+<input type="submit" value="Vote" />
+</form>
+{% endif %}

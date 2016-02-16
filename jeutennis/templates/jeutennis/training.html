@@ -1,0 +1,10 @@
+<h1>{{ user.username }} </h1>
+
+<form action="." method="post">
+{% csrf_token %}
+   <input type="radio" name="service" id="Service" value="{{ service }}" />
+   <label for="Service">Service</label><br/>
+   <input type="radio" name="retour" id="Retour" value="{{ retour }}" />
+   <label for="Retour">Retour</label><br/>
+<input type="submit" value="Vote" />
+</form>    
