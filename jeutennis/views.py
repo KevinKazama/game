@@ -801,6 +801,13 @@ def charts(request):
     class_joueurs = []
     list_joueurs = []
     class_user = []
+    dayjoueurs = []
+    daywin = []
+    dnow = timezone.now()
+    formdnow = str(dnow.year)+"-"+str(dnow.month)+"-"+str(dnow.day)    
+    tomorrow = dnow + timedelta(days=1)
+    formrrow = str(tomorrow.year)+"-"+str(tomorrow.month)+"-"+str(tomorrow.day)  
+ 
     for s in joueur:
 	uid = s.user_id
 	user = User.objects.get(id=uid)
@@ -808,8 +815,17 @@ def charts(request):
 	class_user.append(user.username)
 	class_joueurs.append(s)
 	list_joueurs.append(s.points)
-    context = RequestContext(request, {'class_user' : class_user, 'list_joueurs' : list_joueurs, 'class_joueurs' : class_joueurs,})   
-    return render(request, 'jeutennis/charts.html', context)
+    try:
+    	selected_choice = request.POST['Day']
+	if selected_choice == "Day":
+            for p in table_match.objects.raw('SELECT *, COUNT(*) as total FROM `jeutennis_table_match` WHERE winner = 1 and date_match >= "%s" and date_match < "%s" GROUP BY j1_id ORDER BY total DESC' % (formdnow, formrrow)):
+		dayjoueurs.append(p.j1)
+		daywin.append(p.total)
+            context2 = RequestContext(request, {'list_joueurs' : daywin, 'class_joueurs' : dayjoueurs,})
+	    return render(request, 'jeutennis/charts.html', context2)	 
+    except:
+    	context = RequestContext(request, {'class_user' : class_user, 'list_joueurs' : list_joueurs, 'class_joueurs' : class_joueurs,})   
+    	return render(request, 'jeutennis/charts.html', context)
 
 @login_required
 def calendar(request):
@@ -889,77 +905,93 @@ def tournois(request, redirect_field_name=REDIRECT_FIELD_NAME):
     tournoi1 = []
     tournoi2 = []
     tournoi3 = []
-    notournoi = "Pas de tournoi"
+    notournoi = "Pas de tournoi pour le moment"
     dmax = date_time + timedelta(days=7)	
-
-    req_tournoi = table_tournoi.objects.filter(date_tournoi__gte=date_time, date_tournoi__lte=dmax).order_by('-date_tournoi')[:3]
-    for s in req_tournoi:
-        list_tournoi.append(s.nom)	
-	id_tournoi.append(s.id)        
-
+    pastlist = []
+    winlist = []
+    pastid = []
     try:
-	req_part = table_joueurs.objects.filter(idtournoi = id_tournoi[0]).order_by('-points')
-    	for s in req_part:
-	    list_part.append(s)
-    except:
-	message = "Pas de participants"
-    try: 	
-    	tournoi1.append(id_tournoi[0])
-    	tournoi1.append(list_tournoi[0])
-    except:
-	tournoi1.append(notournoi)
-    try:
-    	tournoi2.append(id_tournoi[1])
-    	tournoi2.append(list_tournoi[1])
-    except:
-	tournoi2.append(notournoi)
-    try:
-    	tournoi3.append(id_tournoi[2])
-    	tournoi3.append(list_tournoi[2])
-    except:
-	tournoi3.append(notournoi)
-    id1 = tournoi1[0]    
-    id2 = tournoi2[0]
-    id3 = tournoi3[0]
+	selected_choice = request.POST['Past']
+	if selected_choice == "Past":
+    	    past_tournoi = table_tournoi.objects.filter(date_tournoi__lte=date_time).order_by('-date_tournoi')
+	    for x in past_tournoi:
+		pastlist.append(x.nom)
+		winlist.append(x.wintour)
+		pastid.append(x.id)
+	    ziplist = zip(pastid, pastlist)
+	    context2 = RequestContext(request, {'pastlist' : ziplist, 'winlist' : winlist, })
+	    return render(request, 'jeutennis/tournois.html', context2)    
 
-    context = RequestContext(request, {
-        'identity' : identity,
-        'list_tournoi' : list_tournoi,
-	'id_tournoi' : id_tournoi,
-	'j_tournoi' : j_tournoi,
-	'list_part' : list_part,
-	'tournoi1' : tournoi1,
-	'tournoi2' : tournoi2,
-	'tournoi3' : tournoi3,
-	'id1' : id1,
-	'id2' : id2,
-	'id3' : id3,
-	'notournoi' : notournoi,
-        })
+    except:
+        req_tournoi = table_tournoi.objects.filter(date_tournoi__gte=date_time, date_tournoi__lte=dmax).order_by('-date_tournoi')[:3]
+        try:
+	    test = req_tournoi[0]
+    	    for s in req_tournoi:
+                list_tournoi.append(s.nom)	
+	        id_tournoi.append(s.id)        
 
-    redirect_to = request.POST.get(redirect_field_name,
+            try:
+	        req_part = table_joueurs.objects.filter(idtournoi = id_tournoi[0]).order_by('-points')
+    	        for s in req_part:
+	            list_part.append(s)
+            except:
+	        message = "Pas de participants"
+            try: 	
+    	        tournoi1.append(id_tournoi[0])
+    	        tournoi1.append(list_tournoi[0])
+            except:
+	        tournoi1.append("notournoi")
+            try:
+    	        tournoi2.append(id_tournoi[1])
+    	        tournoi2.append(list_tournoi[1])
+            except:
+	        tournoi2.append("notournoi")
+            try:
+    	        tournoi3.append(id_tournoi[2])
+    	        tournoi3.append(list_tournoi[2])
+            except:
+	        tournoi3.append("notournoi")
+            id1 = tournoi1[0]    
+            id2 = tournoi2[0]
+            id3 = tournoi3[0]
+
+            context = RequestContext(request, {
+                'identity' : identity,
+                'list_tournoi' : list_tournoi,
+	        'id_tournoi' : id_tournoi,
+	        'j_tournoi' : j_tournoi,
+	        'list_part' : list_part,
+	        'tournoi1' : tournoi1,
+	        'tournoi2' : tournoi2,
+	        'tournoi3' : tournoi3,
+	        'id1' : id1,
+	        'id2' : id2,
+	        'id3' : id3,
+                })
+
+            redirect_to = request.POST.get(redirect_field_name,
                                    request.GET.get(redirect_field_name, ''))
 
-    try:
-        selected_choice = request.POST['inscrit1']
-	joueur.idtournoi = id1
-	joueur.save()
-	return HttpResponseRedirect(redirect_to)
-    except:
-	try:
-		selected_choice = request.POST['inscrit2']
-		joueur.idtournoi = id2
-		joueur.save()
-		return HttpResponseRedirect(redirect_to)
-	except (KeyError, table_joueurs.DoesNotExist):
-		try:
+            try:
+                selected_choice = request.POST['inscrit1']
+	        joueur.idtournoi = id1
+	        joueur.save()
+	        return HttpResponseRedirect(redirect_to)
+            except:
+	        try:
+	  	    selected_choice = request.POST['inscrit2']
+		    joueur.idtournoi = id2
+		    joueur.save()
+		    return HttpResponseRedirect(redirect_to)
+	        except (KeyError, table_joueurs.DoesNotExist):
+		    try:
 			selected_choice = request.POST['inscrit3']
 			joueur.idtournoi = id3
         		joueur.save()
         		return HttpResponseRedirect(redirect_to)
 
  
-    		except (KeyError, table_joueurs.DoesNotExist):
+    		    except (KeyError, table_joueurs.DoesNotExist):
     			try:
         			selected_choice = request.POST['desinscrit']
         			joueur.idtournoi=0
@@ -969,7 +1001,11 @@ def tournois(request, redirect_field_name=REDIRECT_FIELD_NAME):
     			except (KeyError, table_joueurs.DoesNotExist):
         			return render(request, 'jeutennis/tournois.html', context)
 
-    return render(request, 'jeutennis/tournois.html', context)
+            return render(request, 'jeutennis/tournois.html', context)
+
+        except:
+	    contextfail = RequestContext(request, { 'message' : notournoi,})
+	    return render(request, 'jeutennis/tournois.html', contextfail)
 
 @login_required
 def eventtournoi(request, idtournoi):
@@ -986,7 +1022,7 @@ def eventtournoi(request, idtournoi):
     tirage = numtournoi.tirage
     dtournoi = numtournoi.date_tournoi
     jid = []
-    date_time = datetime.datetime.now()
+    date_time = timezone.now()
 
     try:
         req_part = table_joueurs.objects.filter(idtournoi = numtournoi.id).order_by('-points')
@@ -1002,7 +1038,7 @@ def eventtournoi(request, idtournoi):
   
      
     orderedseries = OrderedDict(sorted(series.items(), key=lambda t: t[0])) 
-    if date_time.date >= dtournoi.date:
+    if date_time >= dtournoi:
         
         #testserie = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]    
         #variable tirage bd 0/1
@@ -1039,10 +1075,10 @@ def eventtournoi(request, idtournoi):
 	        req_part2 = table_joueurs.objects.get(id = x)
                 tableau.append(req_part2)
 	
-        z = 0
-        elimine = []
+    z = 0
+    elimine = []
     
-        context = RequestContext(request, {
+    context = RequestContext(request, {
 	    'series' : orderedseries,
 	    'message' : message,
 	    'serie' : serie,
@@ -1051,7 +1087,7 @@ def eventtournoi(request, idtournoi):
 	    #'elimine' : elimine,
 	    })
 
-        return render(request, 'jeutennis/tournaments.html', context)
+    return render(request, 'jeutennis/tournaments.html', context)
 
 @login_required
 def mp(request):

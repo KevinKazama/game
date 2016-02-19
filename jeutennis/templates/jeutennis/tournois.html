@@ -31,6 +31,8 @@
 				<nav id="nav">
 					<ul>
 						<li><a href="/index/" class="button special">Home</a></li>
+                                                <li><a href="/index/mp">MP</a></li>
+                                                <li><a href="/index/banque">Banque</a></li>
 						<li><a href="/index/charts">Classement</a></li>
 						<li><a href="/index/calendar">Calendrier</a></li>
 						<li><a href="/index/tournois">Tournois</a></li>
@@ -39,12 +41,57 @@
 				</nav>
 			</header>
 
+                        <section id="banner">
+                                <div class = "inner">
+                                        <ul class="actions">
+                                                <h2>Tournois</h2>
+                                                <p>Classements !</p>
+                                                <li>
+                                                <form action="." method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" value="Night" name="Night" id="Night" class="button big special">Tournois en cours</button>
+                                                </form>
+                                                </li>
+                                                <li>
+                                                <form action="." method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" value="Past" name="Past" id="Past" class="button big special">Précédents tournois</button>
+                                                </form>
+                                                </li>
+                                        </ul>
+                                </div>
+                        </section>
+
+
+
 		<!-- One -->
 			<section id="one" class="wrapper style1">
-				<header class="major">
-					<h2>Ipsum feugiat consequat</h2>
-					<p>Tempus adipiscing commodo ut aliquam blandit</p>
-				</header>
+			    {% if pastlist %}
+			        <div class="container">
+                                    <div class="row">
+                                            <div class="4u">
+                                                    <section class="special box">
+							    <h2>Tournois</h2>
+                                                       	    {% for x,y in pastlist %}
+                                                               	<div><a href=/index/tournois/{{ x }}>{{ y }}</a></div>
+                                                            {% endfor %}
+                                                    </section>
+                                            </div>
+                                            <div class="4u">
+                                                    <section class="special box">
+							    <h2>Vainqueur</h2>
+                                                            {% for x in winlist %}
+                                                                <div>{{ x }}</div>
+                                                            {% endfor %}
+
+                                                    </section>
+                                            </div>
+				    </div>
+				</div>
+			    {% else %}
+				{% if message %}
+				<center><h2>{{ message }}</h2></center>
+				{% else %}
 				<div class="container">
 					<div class="row">
                                                 <div class="4u">
@@ -70,10 +117,10 @@
 
 							</section>
                                                 </div>
+						{% if id2 = "notournoi" %}
+						{% else %}
 						<div class="4u">
 							<section class="special box">
-								{% if id2 = notournoi %}
-								{% else %}
 									<h3><a href=/index/tournois/{{ id2 }}>Tournoi 2</a></h3>
 									{% for x in tournoi2 %}
 										<div>{{ x }}</div>
@@ -89,10 +136,11 @@
                                                                                 	<input type="submit" name="inscrit2" id="{{ x }}" value="Inscription" />
                                                                                 </form>
 									{% endif %}
-                                                                {% endif %}
-
 							</section>
 						</div>
+						{% endif %}
+						{% if id3 = "notournoi" %}
+						{% else %}
 						<div class="4u">
 							<section class="special box">
 								{% if id3 = notournoi %}
@@ -116,13 +164,14 @@
 
 							</section>
 						</div>
+						{% endif %}
 					</div>
 				</div>
+				{% endif %}
+			    {% endif %}
 			</section>
-		{{ date_time }}
-		{% for x in list_part %}{{ x }}{% endfor %}
-		{{ s_date }}
-			
+				
+	
 		<!-- Two -->
 			<section id="two" class="wrapper style2">
 				<header class="major">

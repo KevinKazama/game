@@ -31,6 +31,8 @@
 				<nav id="nav">
 					<ul>
 						<li><a href="/index/" class="button special">Home</a></li>
+                                                <li><a href="/index/mp">MP</a></li>
+                                                <li><a href="/index/banque">Banque</a></li>
 						<li><a href="/index/charts">Classement</a></li>
 						<li><a href="/index/calendar">Calendrier</a></li>
 						<li><a href="/index/tournois">Tournois</a></li>
@@ -39,13 +41,18 @@
 				</nav>
 			</header>
 
+		<!-- Banner -->
+                        <section id="banner">
+                                <div class="inner">
+                                        <h2>Banque</h2>
+                                        <p>Votre coffre contient {{ cof }} !</p>
+                                        {% if err %}<p>{{ err }}</p>{% endif %}
+                                </div>
+                        </section>
+
+
 		<!-- One -->
 			<section id="one" class="wrapper style1">
-				<header class="major">
-					<h2>Banque</h2>
-					<p>Votre coffre contient {{ cof }} !</p>
-					{% if err %}<p>{{ err }}</p>{% endif %}
-				</header>
 				<div class="container">
 					<section class="special box">
 						<i class="icon fa-area-chart major"></i>

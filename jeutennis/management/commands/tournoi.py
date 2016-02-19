@@ -13,7 +13,7 @@ id_tournoi = []
 list_part = []
 domicile = []
 exterieur = []
-date_time = datetime.datetime.now()
+date_time = timezone.now()
 dmin = date_time - timedelta(days=1)
 dmax = date_time - timedelta(days=6)
 
@@ -38,7 +38,7 @@ class Command(BaseCommand):
             line = fichier.read().splitlines()
 	    fichier.close()
 	    if len(line) < 2:
-		s.winner = line[0]
+		s.wintour_id = line[0]
 		s.save()
 		print(line[0])
 	    else:
@@ -327,7 +327,7 @@ class Command(BaseCommand):
             line = fichier.read().splitlines()
             fichier.close()
 	    if len(line) < 2:
-                s.winner = line[0]
+                s.wintour_id = line[0]
                 s.save()
 
 

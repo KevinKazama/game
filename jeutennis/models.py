@@ -6,13 +6,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class table_tournoi(models.Model):
-	nom = models.CharField(max_length=20)
-	participants = models.IntegerField(default=16)
-	date_tournoi = models.DateTimeField()
-	winner = models.IntegerField(default=0)
-	tirage = models.IntegerField(default=0)
-
 class table_joueurs(models.Model):
 	prenom = models.CharField(max_length=20)
 	nom = models.CharField(max_length=20)
@@ -35,6 +28,14 @@ class table_joueurs(models.Model):
 	coffre = models.IntegerField(default=0)
 	vie = models.IntegerField(default=10)
 	date_vie = models.DateTimeField('dvie')
+
+class table_tournoi(models.Model):
+        nom = models.CharField(max_length=20)
+        participants = models.IntegerField(default=16)
+        date_tournoi = models.DateTimeField()
+        wintour = models.ForeignKey(table_joueurs, related_name="win_j1")
+        tirage = models.IntegerField(default=0)
+
 
 class table_match(models.Model):
         j1 = models.ForeignKey(table_joueurs, related_name="table_j1")
