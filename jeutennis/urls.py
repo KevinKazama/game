@@ -26,5 +26,7 @@ urlpatterns = [
         url(r'^mp/mp_success/$', views.mp_success, name='mp_success'),
         url(r'^mp/(?P<idmp>[0-9]+)-(?P<sujetmp>[\w-]+)/$', views.viewmp, name='viewmp'),
 	url(r'^banque/$', views.banque, name='banque'),
+	url(r'^myplayer/$', views.myplayer, name='myplayer'),
+	url(r'^inventaire/$', views.inventaire, name='inventaire'),
 ]
 

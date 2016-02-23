@@ -22,8 +22,6 @@
 			<link rel="stylesheet" href="{% static 'jeutennis/css/style.css' %}" />
 			<link rel="stylesheet" href="{% static 'jeutennis/css/style-xlarge.css' %}" />		
 		</noscript>
-		<script type="text/javascript" src="{% static 'jeutennis/js/date_heure.js' %}"></script>
-
 	</head>
 	<body id="top">
 
@@ -32,79 +30,119 @@
 				<h1><a href="/index/">WOT</a></h1>
 				<nav id="nav">
 					<ul>
-                                                <li><span id="test"></span>
-                                                    <script type="text/javascript">window.onload = date_heure('test');</script>
-                                                </li>
-						<li><a href="/index/">Home</a></li>
-						{% if user.is_authenticated %}
-						<li><a href="/index/mp">MP</a></li>
-						<li><a href="/index/banque">Banque</a></li>
+						<li><a href="/index/" class="button special">Home</a></li>
+                                                <li><a href="/index/mp">MP</a></li>
+                                                <li><a href="/index/banque">Banque</a></li>
 						<li><a href="/index/charts">Classement</a></li>
 						<li><a href="/index/calendar">Calendrier</a></li>
 						<li><a href="/index/tournois">Tournois</a></li>
-						<li><a href="/index/logout" class="button special">Quitter</a></li>
-						{% else %}
-						<li><a href="/index/register" class="button special">Sign Up</a></li>
-						{% endif %}
+						<li><a href="/index/logout">Quitter</a></li>
 					</ul>
 				</nav>
 			</header>
 
-		<!-- Banner -->
-			<section id="banner">
-				<div class="inner">
-					<h2>World of Tennis</h2>
-					{% if user.is_authenticated %}
-					<p>Bonjour {{ user.username }} !</p>
-					<ul class="actions">
-	                                        <li><a href="/index/detail" class="button big special">S'entrainer</a></li>
-                                                <li><a href="/index/versus" class="button big special">Jouer</a></li>
-                                                <li><a href="/index/myplayer" class="button big special">Mon Profil</a></li>
-					</ul>
 
-					{% else %}
-					<p>Bienvenue sur World of Tennis !</p>
-					<ul class="actions">
-						<li><a href="/index/login" class="button big special">Se connecter</a></li>
-						<li><a href="/index/register" class="button big alt">Inscription</a></li>
+			<section id="banner">
+				<div class = "inner">
+                                	<ul class="actions">
+						<h2>Mon Joueur</h2>
+						<p>{{ prenom }} {{ nom }}</p>
+                                    		<li>
+                                        	<form action="." method="post">
+                                        	{% csrf_token %}
+                                        	<button type="submit" value="Night" name="Night" id="Night" class="button big special">Mon profil</button>
+                                        	</form>
+                                    		</li>
+                                		<li><a href="/index/inventaire" class="button big special">Inventaire</a></li>
 					</ul>
-					{% endif %}
-					
 				</div>
 			</section>
+
+
 
 		<!-- One -->
 			<section id="one" class="wrapper style1">
-				<header class="major">
-					<h2>Ipsum feugiat consequat</h2>
-					<p>Tempus adipiscing commodo ut aliquam blandit</p>
-				</header>
 				<div class="container">
 					<div class="row">
-						<div class="4u">
+                                                <div class="3u">
+                                                        <section class="special box">
+                                                                <h3>Service</h3>
+                                                                        <div>{{ serv }}</div>
+                                                        </section>
+                                                </div>
+						<div class="3u">
 							<section class="special box">
-								<i class="icon fa-area-chart major"></i>
-								<h3>Justo placerat</h3>
-								<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+								<h3>Retour</h3>
+									<div>{{ ret }}</div>
 							</section>
 						</div>
-						<div class="4u">
+						<div class="3u">
 							<section class="special box">
-								<i class="icon fa-refresh major"></i>
-								<h3>Blandit quis curae</h3>
-								<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+								<h3>Concentration</h3>
+									<div>{{ con }}</div>
 							</section>
 						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-cog major"></i>
-								<h3>Amet sed accumsan</h3>
-								<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
-							</section>
-						</div>
+                                                <div class="3u">
+                                                        <section class="special box">
+                                                                <h3>Endurance</h3>
+                                                                        <div>{{ endu }}</div>
+                                                        </section> 
+                                                </div>
+
 					</div>
 				</div>
 			</section>
+                        <section id="one" class="wrapper style1">
+                                <div class="container">
+                                        <div class="row">
+                                                <div class="3u">
+                                                        <section class="special box">
+                                                                <h3>Points</h3>
+                                                                        <div>{{ points }}</div>
+                                                        </section>
+                                                </div>
+                                                <div class="3u">
+                                                        <section class="special box">
+                                                                <h3>Classement</h3>
+									{% if classement = 1 %}
+                                                                        <div>{{ classement }} er</div>
+									{% else %}
+									<div>{{ classement }} eme</div>
+									{% endif %}
+                                                        </section>
+                                                </div>
+                                                <div class="3u">
+                                                        <section class="special box">
+                                                                <h3>Victoires</h3>
+                                                                        <div>{{ vict }}</div>
+                                                        </section>
+                                                </div>
+                                                <div class="3u">
+                                                        <section class="special box">
+                                                                <h3>Defaites</h3>
+                                                                        <div>{{ defaite }}</div>
+                                                        </section>
+                                                </div>
+
+                                        </div>
+                                </div>
+                        </section>
+
+                        <section id="one" class="wrapper style1">
+                                <div class="container">
+                                        <div class="row">
+                                                <div class="3u">
+                                                        <section class="special box">
+                                                                <h3>Palmarès</h3>
+									{% for x in list_tour %}
+                                                                        <div>{{ x }}</div>
+                                                        		{% endfor %}
+							</section>
+                                                </div>
+                                        </div>
+                                </div>
+                        </section>
+
 			
 		<!-- Two -->
 			<section id="two" class="wrapper style2">

@@ -28,6 +28,7 @@ class table_joueurs(models.Model):
 	coffre = models.IntegerField(default=0)
 	vie = models.IntegerField(default=10)
 	date_vie = models.DateTimeField('dvie')
+	is_equip = models.IntegerField(default=0)
 
 class table_tournoi(models.Model):
         nom = models.CharField(max_length=20)
