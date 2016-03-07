@@ -59,7 +59,7 @@
 			<section id="one" class="wrapper style1">
 				<div class="container">
 					<div class="row">
-						{% for id,teq,d,serv,ret,con,end,pr in ziplist %}
+						{% for id,teq,d,serv,ret,con,end,pr,nivreq in ziplist %}
                                                 <div class="3u">
                                                         <section class="special box">
                                                                 <h3>{{ teq }}</h3>
@@ -75,7 +75,11 @@
 									{% else %}
 									<form action="." method="post">
                                                                             {% csrf_token %}
+									    {% if nivreq > niveau %}
+									       Niveau : {{ nivreq }}
+									    {% else %}
                                                                             <button type="submit" name="Equiper" id="{{ id }}" value="{{ id }}">Equiper</button>
+									    {% endif %}
                                                                             <button type="submit" name="Vendre" id="Vendre" value="{{ id }}">Vendre</button>
                                                                         </form>
 									{% endif %}

@@ -35,7 +35,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.template import RequestContext, loader
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import table_joueurs, table_match, table_tournoi, message, table_equipement
+from .models import table_joueurs, table_match, table_tournoi, message, table_equipement, table_level
 from django.contrib.auth.forms import UserCreationForm
 from django.core.context_processors import csrf
 from django.db.models import Q, Count
@@ -694,19 +694,19 @@ def match(request):
 	        loot = int(random.randrange(0,100))
 		if loot == 100:
 			looter = "Loot legendaire"
-			objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 50, ptsservice = 50, ptsretour = 50, ptsconcentration = 50, ptsendurance = 50, prix = 500, proprio_id = joueur1.id)
+			objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 50, ptsservice = 50, ptsretour = 50, ptsconcentration = 50, ptsendurance = 50, prix = 500, nom = "Test", proprio = joueur1.id, nivreq_id = 10)
         		objet.save()
 		elif loot >= 95:
 			looter = "Loot epique"
-			objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 30, ptsservice = 30, ptsretour = 30, ptsconcentration = 30, ptsendurance = 30, prix = 300, proprio_id = joueur1.id)
+			objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 30, ptsservice = 30, ptsretour = 30, ptsconcentration = 30, ptsendurance = 30, prix = 300, nom = "Test", proprio = joueur1.id, nivreq_id = 5)
                         objet.save()
 		elif loot >= 80:
 			looter = "Loot rare"
-                        objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 20, ptsservice = 20, ptsretour = 20, ptsconcentration = 20, ptsendurance = 20, prix = 200, proprio_id = joueur1.id)
+                        objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 20, ptsservice = 20, ptsretour = 20, ptsconcentration = 20, ptsendurance = 20, prix = 200, nom = "Test", proprio = joueur1.id, nivreq_id = 3)
                         objet.save()
 		elif loot >= 50:
 			looter = "Loot commun"
-			objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 10, ptsservice = 10, ptsretour = 10, ptsconcentration = 10, ptsendurance = 10, prix = 100, proprio_id = joueur1.id)
+			objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 10, ptsservice = 10, ptsretour = 10, ptsconcentration = 10, ptsendurance = 10, prix = 100, nom = "Test", proprio = joueur1.id, nivreq_id = 1)
                         objet.save()
 		if arg2 > 800:
 			arg = math.ceil(arg2*0.1)
@@ -1281,9 +1281,15 @@ def myplayer(request):
     con = joueur.concentration
     endu = joueur.endurance
     points = joueur.points
+    exp = joueur.exp
+    niveau = table_level.objects.get(id = joueur.niveau_id)
+    nid = niveau.id
+    max_exp = niveau.max_exp
+    nargent = niveau.nargent
+    nvictoire = niveau.nvictoire 
     tableau = table_joueurs.objects.filter().exclude(points__lte = points).annotate(total=Count('points'))
     classement = len(tableau) + 1
-    equipement = table_equipement.objects.filter(proprio_id = joueur.id)
+    equipement = table_equipement.objects.filter(proprio = joueur.id)
     tournoi = table_tournoi.objects.filter(wintour_id = joueur.id)
     list_equip = []
     list_tour = []
@@ -1306,6 +1312,11 @@ def myplayer(request):
 		'list_equip' : list_equip,
 		'list_tour' : list_tour,
 		'classement' : classement,
+		'exp' : exp,
+		'niveau' : nid,
+		'max_exp' : max_exp,
+		'nvictoire' : nvictoire,
+		'nargent' : nargent,		
 		})
     return render(request, 'jeutennis/myplayer.html', context)
 
@@ -1313,7 +1324,8 @@ def myplayer(request):
 def inventaire(request):
     user = User.objects.get(username=request.user.username)
     joueur = table_joueurs.objects.get(user_id = user.id)
-    equip = table_equipement.objects.filter(proprio_id = joueur.id)
+    niveau = joueur.niveau_id
+    equip = table_equipement.objects.filter(proprio = joueur.id)
     tequip = []
     dur = []
     ptsserv = []
@@ -1322,7 +1334,8 @@ def inventaire(request):
     ptsend = []
     prix = []
     lid = []
-    is_equip = joueur.is_equip
+    nivreq = []
+    is_equip = joueur.is_equip_id
     for x in equip:
 	tequip.append(x.type_equip)
 	dur.append(x.durabilite)
@@ -1333,9 +1346,10 @@ def inventaire(request):
 	arg = math.ceil(x.prix/2)
 	prix.append(int(arg))
     	lid.append(x.id)
+	nivreq.append(x.nivreq_id)
     try:
 	y = tequip[0]
-	ziplist = zip(lid,tequip,dur,ptsserv,ptsret,ptscon,ptsend,prix)
+	ziplist = zip(lid,tequip,dur,ptsserv,ptsret,ptscon,ptsend,prix,nivreq)
     except:
 	message = "Rien"
 	context2 = RequestContext(request, { 'message' : message })
@@ -1343,7 +1357,7 @@ def inventaire(request):
 
     try:
         selected_choice = request.POST['Equiper']
-	joueur.is_equip = int(selected_choice)
+	joueur.is_equip_id = int(selected_choice)
         joueur.save()
         return HttpResponseRedirect('/index/inventaire/')
     
@@ -1355,7 +1369,7 @@ def inventaire(request):
         sellequip = table_equipement.objects.get(id = int(selected_choice))
 	joueur.argent += math.ceil(sellequip.prix/2)
 	joueur.save()
-	sellequip.proprio_id = 2
+	sellequip.proprio = 0
 	sellequip.save()
         return HttpResponseRedirect('/index/inventaire/')
 
@@ -1372,7 +1386,9 @@ def inventaire(request):
 		'ptscon' : ptscon,
 		'ptsend' : ptsend,
 		'prix' : prix,
+		'nivreq' : nivreq,
 		'ziplist' : ziplist,
 		'is_equip' : is_equip,
+		'niveau' : niveau,
 		} )
     return render(request, 'jeutennis/inventaire.html', context)

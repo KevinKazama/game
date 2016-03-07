@@ -61,73 +61,52 @@
 
 
 		<!-- One -->
+			<hr>
+			<center>
+			<h3>Niveau {{ niveau }}</h3>
+			<progress max="100" value={{ exp }} form="form-id">25%</progress>
+			</center>
+			<hr>			
+			<section id="one" class="wrapper style1">
+				<div class="container">
+					<h3>Objectifs</h3>
+                                	<div class="row">
+						<div>Expérience : {{ max_exp }}</div>
+						<div>Matchs gagnés : {{ nvictoire }}</div>
+						<div>Argent : {{ nargent }}</div>	
+					</div>
+				</div>
+			</section>	
+	
 			<section id="one" class="wrapper style1">
 				<div class="container">
 					<div class="row">
-                                                <div class="3u">
+                                                <div class="4u">
                                                         <section class="special box">
-                                                                <h3>Service</h3>
-                                                                        <div>{{ serv }}</div>
+                                                                <h3>Compétences</h3>
+                                                                        <div>Service : {{ serv }}</div>
+									<div>Retour : {{ ret }}</div>
+									<div>Concentration : {{ con }}</div>
+									<div>Endurance : {{ endu }}</div>
                                                         </section>
                                                 </div>
-						<div class="3u">
-							<section class="special box">
-								<h3>Retour</h3>
-									<div>{{ ret }}</div>
-							</section>
-						</div>
-						<div class="3u">
-							<section class="special box">
-								<h3>Concentration</h3>
-									<div>{{ con }}</div>
-							</section>
-						</div>
-                                                <div class="3u">
+                                                <div class="4u">
                                                         <section class="special box">
-                                                                <h3>Endurance</h3>
-                                                                        <div>{{ endu }}</div>
-                                                        </section> 
-                                                </div>
-
-					</div>
-				</div>
-			</section>
-                        <section id="one" class="wrapper style1">
-                                <div class="container">
-                                        <div class="row">
-                                                <div class="3u">
-                                                        <section class="special box">
-                                                                <h3>Points</h3>
-                                                                        <div>{{ points }}</div>
-                                                        </section>
-                                                </div>
-                                                <div class="3u">
-                                                        <section class="special box">
-                                                                <h3>Classement</h3>
+                                                                <h3>Carrière</h3>
+                                                                        <div>Points : {{ points }}</div>
 									{% if classement = 1 %}
-                                                                        <div>{{ classement }} er</div>
+                                                                        <div>Classement : {{ classement }} er</div>
 									{% else %}
-									<div>{{ classement }} eme</div>
+									<div>Classement : {{ classement }} eme</div>
 									{% endif %}
-                                                        </section>
-                                                </div>
-                                                <div class="3u">
-                                                        <section class="special box">
-                                                                <h3>Victoires</h3>
-                                                                        <div>{{ vict }}</div>
-                                                        </section>
-                                                </div>
-                                                <div class="3u">
-                                                        <section class="special box">
-                                                                <h3>Defaites</h3>
-                                                                        <div>{{ defaite }}</div>
+                                                                        <div>Victoires : {{ vict }}</div>
+                                                                        <div>Défaites : {{ defaite }}</div>
                                                         </section>
                                                 </div>
 
                                         </div>
                                 </div>
                         </section>
-
                         <section id="one" class="wrapper style1">
                                 <div class="container">
                                         <div class="row">

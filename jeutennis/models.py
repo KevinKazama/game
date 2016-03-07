@@ -6,6 +6,24 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class table_level(models.Model):
+	min_exp = models.IntegerField(default=0)
+	max_exp = models.IntegerField(default=1)
+	nargent = models.IntegerField(default=1)
+	nvictoire = models.IntegerField(default=1)
+
+class table_equipement(models.Model):
+	nom = models.CharField(max_length=40)
+        type_equip = models.CharField(max_length=20)
+        durabilite = models.IntegerField(default=50)
+        ptsservice = models.IntegerField(default=0)
+        ptsretour = models.IntegerField(default=0)
+        ptsconcentration = models.IntegerField(default=0)
+        ptsendurance = models.IntegerField(default=0)
+        prix = models.IntegerField(default=0)
+        proprio = models.IntegerField(default=0)
+	nivreq = models.ForeignKey(table_level)
+
 class table_joueurs(models.Model):
 	prenom = models.CharField(max_length=20)
 	nom = models.CharField(max_length=20)
@@ -28,7 +46,9 @@ class table_joueurs(models.Model):
 	coffre = models.IntegerField(default=0)
 	vie = models.IntegerField(default=10)
 	date_vie = models.DateTimeField('dvie')
-	is_equip = models.IntegerField(default=0)
+	is_equip = models.ForeignKey(table_equipement)
+	exp = models.IntegerField(default=0)
+	niveau = models.ForeignKey(table_level)
 
 class table_tournoi(models.Model):
         nom = models.CharField(max_length=20)
@@ -63,16 +83,6 @@ class message(models.Model):
 	status = models.IntegerField(default=0)
 	date_mp = models.DateTimeField('mp')
 	crypt = models.CharField(max_length=6)
-
-class table_equipement(models.Model):
-	type_equip = models.CharField(max_length=20)
-	durabilite = models.IntegerField(default=50)
-	ptsservice = models.IntegerField(default=0)
-	ptsretour = models.IntegerField(default=0)
-	ptsconcentration = models.IntegerField(default=0)
-	ptsendurance = models.IntegerField(default=0)
-	prix = models.IntegerField(default=0)
-	proprio = models.ForeignKey(table_joueurs)
 
 class staff(models.Model):
         prenom = models.CharField(max_length=20)
