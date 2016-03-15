@@ -41,6 +41,29 @@
 				</nav>
 			</header>
 
+                        <section id="banner">
+                                <div class = "inner">
+                                        <ul class="actions">
+                                                <h2>Entraînement</h2>
+                                                <p>Le temple de la gloire !</p>
+                                                <li>
+                                                <form action="." method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" value="Night" name="Night" id="Night" class="button big special">Express</button>
+                                                </form>
+                                                </li>
+                                                <li>
+                                                <form action="." method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" value="Day" name="Day" id="Day" class="button big special">Quotidien</button>
+                                                </form>
+                                                </li>
+                                        </ul>
+                                </div>
+                        </section>
+
+
+
 		<!-- One -->
 			<section id="one" class="wrapper style1">
 				<header class="major">
@@ -48,6 +71,20 @@
 					<p>La clé du succès, {{ user.username }} !</p>
 				</header>
 				<div class="container">
+				    {% if express_message %}
+					<div>Vous avez {{ argent }} €. La session coûte 100€.</div>
+					{% for x,y in zipstat %}
+					<div>{{ x }} : {{ y }}</div>
+					{% endfor %}
+					<div>
+					<form action="." method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" value="Train" name="Train" id="Train" class="button big special">C'est parti !</button>
+                                        </form>
+					</div>
+
+
+				    {% else %}
                                         {% if message %}<h3>{{ message }}</h3>{% endif %}
                                         {% if error_message %}<h3>{{ error_message }}</h3>{% endif %}
 
@@ -64,6 +101,7 @@
 						<input type="submit" value="Vote" />
 						</form>
 					{% endif %}
+				    {% endif %}
 
 					</section>
 				</div>

@@ -28,5 +28,6 @@ urlpatterns = [
 	url(r'^banque/$', views.banque, name='banque'),
 	url(r'^myplayer/$', views.myplayer, name='myplayer'),
 	url(r'^inventaire/$', views.inventaire, name='inventaire'),
+	url(r'^train_session/$', views.train_session, name='train_session'),
 ]
 

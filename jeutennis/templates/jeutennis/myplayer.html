@@ -64,14 +64,23 @@
 			<hr>
 			<center>
 			<h3>Niveau {{ niveau }}</h3>
-			<progress max="100" value={{ exp }} form="form-id">25%</progress>
+			<progress max="{{ max_exp }}" value={{ exp }} form="form-id">{{ exp }}</progress>
+			<br>
+			{% if levelup = 0 %}
+			Achevez les objectifs ci-dessous pour monter de niveau !
+			{% else %}
+			<form action="." method="post">
+                        {% csrf_token %}
+                        <button type="submit" value="levelup" name="levelup" id="levelup" class="button big special">Niveau suivant</button>
+                        </form>
+			{% endif %}
 			</center>
 			<hr>			
 			<section id="one" class="wrapper style1">
 				<div class="container">
 					<h3>Objectifs</h3>
                                 	<div class="row">
-						<div>Expérience : {{ max_exp }}</div>
+						<div>Expérience : {{ exp }}/{{ max_exp }}</div>
 						<div>Matchs gagnés : {{ nvictoire }}</div>
 						<div>Argent : {{ nargent }}</div>	
 					</div>

@@ -362,6 +362,7 @@ def detail(request):
     retour = joueur.retour
     concentration = joueur.concentration
     endurance = joueur.endurance
+    argent = joueur.argent
     date_train = joueur.date_train
     date_time = datetime.datetime.now()
     date_format = datetime.date(date_time.year,date_time.month,date_time.day)
@@ -381,29 +382,49 @@ def detail(request):
         'stats' : stats,
         'error_message' : "Commencer l\'entrainement ?",
     })
-    if date_format == date_train:
-    	return render(request, 'jeutennis/detail.html', context_fail)
-    else:
-    	try:
-        	selected_choice = request.POST['training']
-    	except (KeyError, table_joueurs.DoesNotExist):
-        	return render(request, 'jeutennis/detail.html', context)
-    	else:
-        	if selected_choice == "service":
+    try:
+        selected_choice = request.POST['Day']
+        if selected_choice == "Day":
+	    if date_format == date_train:
+    		return render(request, 'jeutennis/detail.html', context_fail)
+   	    else:
+    		try:
+        	    selected_choice = request.POST['training']
+    		except (KeyError, table_joueurs.DoesNotExist):
+        	    return render(request, 'jeutennis/detail.html', context)
+    		else:
+        	    if selected_choice == "service":
                 	joueur.service += 1
                 	joueur.save()
-        	elif selected_choice == "retour":
+        	    elif selected_choice == "retour":
                 	joueur.retour += 1
                 	joueur.save()
-        	elif selected_choice == "concentration":
+        	    elif selected_choice == "concentration":
                 	joueur.concentration += 1
                 	joueur.save()
-        	elif selected_choice == "endurance":
+        	    elif selected_choice == "endurance":
                 	joueur.endurance += 1
                 	joueur.save()
-                joueur.date_train = date_format
-                joueur.save()
-        	return HttpResponseRedirect('/index/results/')
+                    joueur.date_train = date_format
+                    joueur.save()
+        	    return HttpResponseRedirect('/index/results/')
+
+    except:
+	try:
+	    selected_choice = request.POST['Train']
+	    if selected_choice == "Train":
+		return HttpResponseRedirect('/index/train_session/')
+	
+
+	except:
+	    zipstat = zip(stats,output) 
+            context2 = RequestContext(request, {
+                'zipstat' : zipstat,
+                'express_message' : "Commencer l\'entrainement ?",
+	        'argent' : argent,
+            })
+	    return render(request, 'jeutennis/detail.html', context2)	
+
 
 def training(request):
     return render(request, 'jeutennis/template.html')
@@ -471,6 +492,8 @@ def match(request):
     adv = joueur1.adversaire
     datematch = joueur1.date_match
     d_format = datetime.datetime(datematch.year,datematch.month,datematch.day,datematch.hour,datematch.minute,datematch.second)
+    inv = table_equipement.objects.filter(proprio = joueur1.id).annotate(total=Count('id'))
+    inventaire = len(inv)
     date_time = datetime.datetime.now()
     delta = date_time - d_format
     delta_s = delta.seconds
@@ -517,11 +540,13 @@ def match(request):
     con2 = joueur2.concentration
     arg1 = joueur1.argent
     arg2 = joueur2.argent
+    niv = joueur1.niveau_id
     diff = 0
     comm = []
     message = []
     nbtour = [] 
     comptset = 0   
+    exp = joueur1.exp
     vie = joueur1.vie
     vie = int(vie)    
     looter = "Loot : Rien"
@@ -683,15 +708,19 @@ def match(request):
 		i += 1	
 	
 	strwin = ' - '.join(win)
-	strwin2 = ' - '.join(win2)	
+	strwin2 = ' - '.join(win2)
 	if set1 > set2:
 		context2 = j1+" gagne "+strwin+" !"
+		joueur1.argent += int(niv)*10+100
 		joueur1.victoire += 1
 		joueur2.defaite += 1
 		joueur1.points += 60
 		joueur2.points -= 50
 		winner = 1
-	        loot = int(random.randrange(0,100))
+		if inventaire < 20:	
+		    loot = int(random.randrange(0,100))
+		else:
+		    loot = 0
 		if loot == 100:
 			looter = "Loot legendaire"
 			objet = table_equipement.objects.create(type_equip = "raquette", durabilite = 50, ptsservice = 50, ptsretour = 50, ptsconcentration = 50, ptsendurance = 50, prix = 500, nom = "Test", proprio = joueur1.id, nivreq_id = 10)
@@ -719,6 +748,12 @@ def match(request):
 		joueur1.points -= 60
 		joueur2.points += 50
 		winner = 2
+
+	#Add exp
+	
+	for i in res1:
+		exp += i
+	joueur1.exp = exp
 
 	joueur1.save()
 	joueur2.save()
@@ -750,6 +785,7 @@ def match(request):
                 's5j2' : s5j2,
 		'nbtour' : nbtour,
 		'looter' : looter,
+		'exp' : exp,
     	})
 	
 
@@ -1282,6 +1318,7 @@ def myplayer(request):
     endu = joueur.endurance
     points = joueur.points
     exp = joueur.exp
+    argent = joueur.argent
     niveau = table_level.objects.get(id = joueur.niveau_id)
     nid = niveau.id
     max_exp = niveau.max_exp
@@ -1293,13 +1330,24 @@ def myplayer(request):
     tournoi = table_tournoi.objects.filter(wintour_id = joueur.id)
     list_equip = []
     list_tour = []
+    levelup = 0
+    if (exp > max_exp) and (vict > nvictoire) and (argent > nargent):
+	levelup = 1 
     try:
-        for x in tournoi:
-            list_tour.append(x.nom)
-        y = list_tour[0]
+        selected_choice = request.POST['levelup']
+        if selected_choice == "levelup":
+	    joueur.argent -= nargent
+	    joueur.niveau_id += 1
+	    joueur.save()
+	return HttpResponseRedirect('/index/myplayer')
     except:
-        list_tour.append("Pas de palmares")
-    context = RequestContext(request, {
+	try:
+            for x in tournoi:
+                list_tour.append(x.nom)
+            y = list_tour[0]
+        except:
+            list_tour.append("Pas de palmares")
+        context = RequestContext(request, {
 		'prenom' : prenom,
 		'nom' : nom,
 		'vict' : vict,
@@ -1317,8 +1365,9 @@ def myplayer(request):
 		'max_exp' : max_exp,
 		'nvictoire' : nvictoire,
 		'nargent' : nargent,		
+		'levelup' : levelup,
 		})
-    return render(request, 'jeutennis/myplayer.html', context)
+        return render(request, 'jeutennis/myplayer.html', context)
 
 @login_required
 def inventaire(request):
@@ -1392,3 +1441,59 @@ def inventaire(request):
 		'niveau' : niveau,
 		} )
     return render(request, 'jeutennis/inventaire.html', context)
+
+@login_required
+def train_session(request):
+    user = User.objects.get(username=request.user.username)
+    joueur = table_joueurs.objects.get(user_id = user.id)
+    service = joueur.service
+    retour = joueur.retour
+    concentration = joueur.concentration
+    endurance = joueur.endurance
+    argent = joueur.argent
+    listcaract = ["service","retour","concentration","endurance"]
+    caract = [service,retour,concentration,endurance]
+    newcaract = []
+    cout = [300,500,700]
+    intervalle = [3,5,7]
+    level = ["Facile","Moyenne","Difficile"]
+    ziptrain = zip(cout,intervalle,level)
+    stats = []
+    i = 0
+
+    try:
+	selected_choice = request.POST['Facile']
+	while i < 4:
+            alea = int(random.randrange(0,2*intervalle[0]))
+	    alea -= intervalle[0]
+	    new = caract[i] + alea
+	    stats.append(alea)
+	    newcaract.append(new)
+	    i += 1
+	contextup = RequestContext(request, {
+		'stats' : stats,
+		'caract' : listcaract,
+		'newcaract' : newcaract,
+		})
+	return render(request, 'jeutennis/train_session.html', contextup)
+
+    except:
+	try:
+	    selected_choice = request.POST['Moyenne']
+
+	except:
+	    try:
+		selected_choice = request.POST['Difficile']
+	    except:
+		try:
+		    selected_choice = request.POST['UP']
+		except:
+    		    context = RequestContext(request, {
+			'ziptrain' : ziptrain,
+			'service' : service,
+			'retour' : retour,
+			'concentration' : concentration,
+			'endurance' : endurance,
+			'argent' : argent,
+			})
+    		    return render(request, 'jeutennis/train_session.html', context)
