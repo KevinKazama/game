@@ -1,204 +1,272 @@
 {% load staticfiles %}
 
-<!DOCTYPE HTML>
-<!--
-	Ion by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-	<head>
-		<title>Ion by TEMPLATED</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="{% static 'jeutennis/js/html5shiv.js' %}"></script><![endif]-->
-		<script src="{% static 'jeutennis/js/jquery.min.js' %}"></script>
-		<script src="{% static 'jeutennis/js/skel.min.js' %}"></script>
-		<script src="{% static 'jeutennis/js/skel-layers.min.js' %}"></script>
-		<script src="{% static 'jeutennis/js/init.js' %}"></script>
-		<noscript>
-			<link rel="stylesheet" href="{% static 'jeutennis/css/skel.css' %}" />
-			<link rel="stylesheet" href="{% static 'jeutennis/css/style.css' %}" />
-			<link rel="stylesheet" href="{% static 'jeutennis/css/style-xlarge.css' %}" />		
-		</noscript>
-	</head>
-	<body id="top">
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>World of Tennis</title>
+    
+    <link rel="stylesheet" href="css/reset.css">
 
-		<!-- Header -->
-			<header id="header" class="skel-layers-fixed">
-				<h1><a href="#">Ion</a></h1>
-				<nav id="nav">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="left-sidebar.html">Left Sidebar</a></li>
-						<li><a href="right-sidebar.html">Right Sidebar</a></li>
-						<li><a href="no-sidebar.html">No Sidebar</a></li>
-						<li><a href="#" class="button special">Sign Up</a></li>
-					</ul>
-				</nav>
-			</header>
+    
+        <style>
+@charset "UTF-8";
+@import url(font-awesome.min.css);
+@import url("http://fonts.googleapis.com/css?family=Roboto:500,300");
 
-		<!-- Banner -->
-			<section id="banner">
-				<div class="inner">
-					<h2>This is Ion</h2>
-					{% if user.is_authenticated %}
-					<p>Bonjour {{ user.username }} !</p>
-					{% else %}
-					<p>Bienvenue sur World of Tennis !</p>
-					{% endif %}
-					<ul class="actions">
-						<li><a href="/index/login" class="button big special">Se connecter</a></li>
-						<li><a href="/index/register" class="button big alt">Inscription</a></li>
-					</ul>
-				</div>
-			</section>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      body {
+  font-family: "Roboto", Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: no-repeat fixed;
+  background-image: url("/static/jeutennis/img/background.jpg");
+  background-size : cover;
+ }
 
-		<!-- One -->
-			<section id="one" class="wrapper style1">
-				<header class="major">
-					<h2>Ipsum feugiat consequat</h2>
-					<p>Tempus adipiscing commodo ut aliquam blandit</p>
-				</header>
-				<div class="container">
-					<div class="row">
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-area-chart major"></i>
-								<h3>Justo placerat</h3>
-								<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-refresh major"></i>
-								<h3>Blandit quis curae</h3>
-								<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-cog major"></i>
-								<h3>Amet sed accumsan</h3>
-								<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>
-			
-		<!-- Two -->
-			<section id="two" class="wrapper style2">
-				<header class="major">
-					<h2>Commodo accumsan aliquam</h2>
-					<p>Amet nisi nunc lorem accumsan</p>
-				</header>
-				<div class="container">
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a href="#" class="image fit"><img src="/static/jeutennis/img/pic01.jpg" alt="" /></a>
-								<h3>Mollis adipiscing nisl</h3>
-								<p>Eget mi ac magna cep lobortis faucibus accumsan enim lacinia adipiscing metus urna adipiscing cep commodo id. Ac quis arcu amet. Arcu nascetur lorem adipiscing non faucibus odio nullam arcu lobortis. Aliquet ante feugiat. Turpis aliquet ac posuere volutpat lorem arcu aliquam lorem.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a href="#" class="image fit"><img src="/static/jeutennis/img/pic02.jpg" alt="" /></a>
-								<h3>Neque ornare adipiscing</h3>
-								<p>Eget mi ac magna cep lobortis faucibus accumsan enim lacinia adipiscing metus urna adipiscing cep commodo id. Ac quis arcu amet. Arcu nascetur lorem adipiscing non faucibus odio nullam arcu lobortis. Aliquet ante feugiat. Turpis aliquet ac posuere volutpat lorem arcu aliquam lorem.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>
+.font {
+  background: rgba(0, 0, 0, 0.9);
+  position:absolute;
+  margin-left: 30em; /* Cette valeur doit être la moitié négative de la valeur du width */
+  margin-top: 2em;
+  width: 30em;
+  height: 30em;
+  border-radius: 100%;
+  box-shadow: 0 0 0 0.5em #fff, 0 0 0 0.5em rgba(0, 0, 0, 0.25);
+}
 
-		<!-- Three -->
-			<section id="three" class="wrapper style1">
-				<div class="container">
-					<div class="row">
-						<div class="8u">
-							<section>
-								<h2>Mollis ut adipiscing</h2>
-								<a href="#" class="image fit"><img src="/static/jeutennis/img/pic03.jpg" alt="" /></a>
-								<p>Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit accumsan sapien blandit ac amet faucibus aliquet placerat commodo. Interdum ante aliquet commodo accumsan vis phasellus adipiscing. Ornare a in lacinia. Vestibulum accumsan ac metus massa tempor. Accumsan in lacinia ornare massa amet. Ac interdum ac non praesent. Cubilia lacinia interdum massa faucibus blandit nullam. Accumsan phasellus nunc integer. Accumsan euismod nunc adipiscing lacinia erat ut sit. Arcu amet. Id massa aliquet arcu accumsan lorem amet accumsan commodo odio cubilia ac eu interdum placerat placerat arcu commodo lobortis adipiscing semper ornare pellentesque.</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section>
-								<h3>Magna massa blandit</h3>
-								<p>Feugiat amet accumsan ante aliquet feugiat accumsan. Ante blandit accumsan eu amet tortor non lorem felis semper. Interdum adipiscing orci feugiat penatibus adipiscing col cubilia lorem ipsum dolor sit amet feugiat consequat.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-							<hr />
-							<section>
-								<h3>Ante sed commodo</h3>
-								<ul class="alt">
-									<li><a href="#">Erat blandit risus vis adipiscing</a></li>
-									<li><a href="#">Tempus ultricies faucibus amet</a></li>
-									<li><a href="#">Arcu commodo non adipiscing quis</a></li>
-									<li><a href="#">Accumsan vis lacinia semper</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>			
-			
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<div class="row double">
-						<div class="6u">
-							<div class="row collapse-at-2">
-								<div class="6u">
-									<h3>Accumsan</h3>
-									<ul class="alt">
-										<li><a href="#">Nascetur nunc varius</a></li>
-										<li><a href="#">Vis faucibus sed tempor</a></li>
-										<li><a href="#">Massa amet lobortis vel</a></li>
-										<li><a href="#">Nascetur nunc varius</a></li>
-									</ul>
-								</div>
-								<div class="6u">
-									<h3>Faucibus</h3>
-									<ul class="alt">
-										<li><a href="#">Nascetur nunc varius</a></li>
-										<li><a href="#">Vis faucibus sed tempor</a></li>
-										<li><a href="#">Massa amet lobortis vel</a></li>
-										<li><a href="#">Nascetur nunc varius</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="6u">
-							<h2>Aliquam Interdum</h2>
-							<p>Blandit nunc tempor lobortis nunc non. Mi accumsan. Justo aliquet massa adipiscing cubilia eu accumsan id. Arcu accumsan faucibus vis ultricies adipiscing ornare ut. Mi accumsan justo aliquet.</p>
-							<ul class="icons">
-								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-							</ul>
-						</div>
-					</div>
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
-					</ul>
-				</div>
-			</footer>
+.image {
+  text-align: center;
+  width: 30em;
+  height: 17em;
 
-	</body>
+}
+
+.title {
+  position: absolute;
+  text-align: center;
+  width: 30em;
+  height: 5em;
+  margin: auto;
+}
+
+
+.menu {
+  position: absolute;
+  border: 0em;
+  left: 0;
+  right: 0;
+  width: 30em;
+  height: 15em;
+  margin: auto;
+}
+
+i  {
+  position:absolute;
+  top:6.8em;
+  left:14.3em;
+  z-index:2;
+  transition: all 300ms ease-in-out;
+}
+
+/*img {
+  width:30px;
+  position:absolute;
+  bottom:20px;
+  right:20px;
+}
+*/
+
+h1
+{
+    font-size: 1.6em;
+    word-wrap: break-word;
+    color: white;
+}
+
+img.logo {
+    max-width: 100%;
+}
+
+.menu:hover i {
+  top:3em;
+          transition: all 700ms ease-in-out;
+  cursor:pointer;
+}
+
+.menu:hover a {
+  background-size:40%;
+}
+
+.menu:hover i span {
+   top:0.75em;
+  width:1.1em;
+  margin-left:0.2em;
+  transition: all 200ms ease-in-out;
+}
+
+
+
+span {
+  background:#000;
+  height:0.2em;
+  width:1.4em;
+  display:block;
+  margin:0.3em 0;
+  position:absolute;
+}
+
+span:nth-child(2) {
+  top:0.45em;
+}
+
+span:last-child {
+  top:0.9em;
+}
+
+button {
+  border: 0em;
+  width: 30em;
+  height: 15em;
+  filter: blur(1.5em) contrast(30);
+  transition: all 300ms ease-in-out;
+}
+
+div:hover button {
+filter: blur(0) contrast(1);
+transition: all 0.9s ease-in-out;
+}
+
+button:focus {
+  outline: 0em;
+}
+
+a {
+  background: url("http://i.imgur.com/2pPxvki.png") white no-repeat center center;
+  background-size:0%;
+  width: 5.2em;
+  height: 5.2em;
+  position: absolute;
+  left: 50%;
+  top: 85%;
+  margin-top: -7.5em;
+  margin-left: -2.6em;
+  border-radius: 100%;
+  -webkit-transition: all 300ms ease-in-out;
+          transition: all 300ms ease-in-out;
+  color:#000;
+  text-decoration:none;
+}
+
+a:nth-child(1):hover {
+    background: url("http://i.imgur.com/POSj5xS.png") white no-repeat center center;
+  background-size:50%;
+}
+
+a:nth-child(3) {
+  background: url("http://i.imgur.com/hOqtYj1.png") white no-repeat center center;
+  background-size:0%;
+}
+
+a:nth-child(3):hover {
+  background: url("http://i.imgur.com/5DZxCkB.png") white no-repeat center center;
+  background-size:50%;
+}
+
+a:nth-child(2) {
+  background: url("http://imgur.com/jZ8HrKD.png") white no-repeat center center;
+  background-size:0%;
+}
+
+a:nth-child(2):hover {
+  background: url("http://i.imgur.com/7QoxG0X.png") white no-repeat center center;
+  background-size:50%;
+}
+
+a.logo {
+  width: auto;
+  height: auto;
+  position: inherit;
+}
+
+a.logo:after {
+  display:none;
+}
+
+a:after {
+  content: '';
+  color: #fff;
+  position: absolute;
+  width: 4em;
+  bottom: 0em;
+  text-align: center;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  left:0em;
+  
+          transition: all 100ms ease-in-out;
+  
+          filter: blur(1.5em) contrast(30);
+}
+
+a:hover:after{
+  opacity:1;
+  bottom: -1.5em;
+  
+          transition: all 400ms ease-in-out;
+  
+          filter: blur(0em) contrast(1);
+}
+
+a:first-child:hover:after{
+  content:'contact';
+}
+
+a:nth-child(2):hover:after{
+  content:'Connexion';
+}
+
+a:last-child:hover:after {
+  content:'Inscription';
+}
+
+.menu:hover a:nth-child(2) {
+          transform: translateX(3em);
+}
+
+.menu:hover a:last-child {
+  
+  
+          transform: translateX(-3em);
+  
+}
+    </style>
+
+    
+
+
+    
+  </head>
+
+  <body>
+    <div class=font>
+        <div class="image">	
+            <img class="logo" src="/static/jeutennis/img/icone.png" alt="World of Tennis">
+        </div>
+        <div class="title">
+	    <h1>Welcome to World of Tennis !</h1>
+        </div>
+        <div class="menu">
+          <i>
+            <span></span>
+            <span></span>
+            <span></span>
+          </i>
+            <a href="/index/login/"></a>
+            <a href="/index/register/"></a>
+       </div>
+    </div> 
+  </body>
 </html>

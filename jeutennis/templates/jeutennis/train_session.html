@@ -47,17 +47,11 @@
                                                 <h2>Entrainement</h2>
                                                 <p>Le temple de la gloire !</p>
                                                 <li>
-                                                <form action="." method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" value="Night" name="Night" id="Night" class="button big special">Général</button>
-                                                </form>
+                                                <a href="/index/detail" class="button big special">Retour</a>
                                                 </li>
                                                 <li>
-                                                <form action="." method="post">
-                                                {% csrf_token %}
-                                                <button type="submit" value="Day" name="Day" id="Day" class="button big special">Jour</button>
-                                                </form>
-                                                </li>
+                                                <a href="/index" class="button big special">Accueil</a>
+						</li>
                                         </ul>
                                 </div>
                         </section>
@@ -91,17 +85,34 @@
                                                         </section>
                                                 </div>
 
+						<form action="." method="post">
+                                                	{% csrf_token %}
+							{% for x, y in zipup %}
+							<input type="hidden" name="{{ x }}" id="{{ x }}" value="{{ y }}" />
+                                                	{% endfor %}
+							<button type="submit" value="UP" name="UP" id="UP" class="button big special">Valider</button>
+                                                </form>
+						<form action="." method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" value="Night" name="Night" id="Night" class="button big special">Annuler</button>
+                                                </form>
+
+
+
 					    {% else %}
 						{% for x,y,z in ziptrain %}
                                                 <div class="4u">
 							<section class="special box">
 	                                                <div>Coût : {{ x }}</div>
                                                         <div>Intervalle : -{{ y }} / +{{ y }}</div>
-
+							{% if argent > x %}
 							<form action="." method="post">
 	                                                {% csrf_token %}
         	                                        <button type="submit" value="{{ z }}" name="{{ z }}" id="{{ z }}" class="button big special">{{ z }}</button>
                 	                                </form>
+							{% else %}
+							<div>Pas assez d'argent</div>
+							{% endif %}
 							</section>
 						</div>
 						{% endfor %}
