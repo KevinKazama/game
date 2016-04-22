@@ -1,0 +1,37 @@
+<h1>Se connecter</h1>
+
+{% if error %}
+<p><strong>Utilisateur inconnu ou mauvais de mot de passe.</strong></p>
+{% endif %}
+
+{% if user.is_authenticated %}
+Vous êtes connecté, {{ user.username }} !
+{% for table_joueurs in user.table_joueurs_set.all %}
+    Bienvenue {{ table_joueurs.prenom }}
+    Infos joueur : 
+    Prénom : {{ table_joueurs.prenom }}
+    Nom : {{ table_joueurs.nom }}
+    <form method="post" action=".">
+        {% csrf_token %}
+        <a href=/index/detail>S'entrainer</a>
+    </form>
+    <form method="post" action=".">
+        {% csrf_token %}
+        <a href=/index/versus>Jouer</a>
+    </form>
+{% endfor %}
+<form method="post" action=".">
+    {% csrf_token %}
+    <a href="/index/logout/">Quitter</a>
+</form>
+{% else %}
+<form method="post" action=".">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Se connecter" />
+</form>
+<form method="post" action=".">
+    {% csrf_token %}
+    <a href="/index/register/">Inscription</a>
+</form>
+{% endif %}

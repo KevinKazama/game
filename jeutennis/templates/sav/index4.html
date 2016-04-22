@@ -1,0 +1,268 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>World of Tennis</title>
+    
+    <link rel="stylesheet" href="css/reset.css">
+
+    
+        <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      body {
+  margin: 0;
+  padding: 0;
+  background: no-repeat fixed;
+  background-image: url("/static/jeutennis/img/background.jpg");
+  background-size : cover;
+ }
+
+.font {
+  background: rgba(0, 0, 0, 0.9);
+  position:absolute;
+  margin-left: 33vw; /* Cette valeur doit être la moitié négative de la valeur du width */
+  width: 33vw;
+  height: 40vw;
+  border-radius: 20%;
+}
+
+.image {
+  text-align: center;
+  width: 33vw;
+  height: 20vw;
+
+}
+
+.title {
+  position: absolute;
+  text-align: center;
+  width: 33vw;
+  height: 5vw;
+  margin: auto;
+}
+
+
+.menu {
+  position: absolute;
+  border: 0vw;
+  top: 75%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 33vw;
+  height: 15vw;
+  margin: auto;
+}
+
+i  {
+  position:absolute;
+  top:6.6vw;
+  left:15.8vw;
+  z-index:2;
+  transition: all 300ms ease-in-out;
+}
+
+/*img {
+  width:30px;
+  position:absolute;
+  bottom:20px;
+  right:20px;
+}
+*/
+
+h1
+{
+    font-size: 2.5vw;
+    word-wrap: break-word;
+    color: white;
+}
+
+img.logo {
+    height: 20vw;
+    max-width: 100%;
+}
+
+.menu:hover i {
+  top:0vw;
+          transition: all 700ms ease-in-out;
+  cursor:pointer;
+}
+
+.menu:hover a {
+  background-size:40%;
+}
+
+.menu:hover i span {
+   top:0.75vw;
+  width:1.1vw;
+  margin-left:0.2vw;
+  transition: all 200ms ease-in-out;
+}
+
+
+
+span {
+  background:#000;
+  height:0.2vw;
+  width:1.4vw;
+  display:block;
+  margin:0.3vw 0;
+  position:absolute;
+}
+
+span:nth-child(2) {
+  top:0.45vw;
+}
+
+span:last-child {
+  top:0.9vw;
+}
+
+button {
+  border: 0vw;
+  width: 30vw;
+  height: 15vw;
+  filter: blur(1.5vw) contrast(30);
+  transition: all 300ms ease-in-out;
+}
+
+div:hover button {
+filter: blur(0) contrast(1);
+transition: all 0.9s ease-in-out;
+}
+
+button:focus {
+  outline: 0vw;
+}
+
+a {
+  background: url("http://i.imgur.com/2pPxvki.png") white no-repeat center center;
+  background-size:0%;
+  width: 5.2vw;
+  height: 5.2vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -2.6vw;
+  margin-left: -2.6vw;
+  border-radius: 100%;
+  -webkit-transition: all 300ms ease-in-out;
+          transition: all 300ms ease-in-out;
+  color:#000;
+  text-decoration:none;
+}
+
+a:nth-child(1):hover {
+    background: url("http://i.imgur.com/POSj5xS.png") white no-repeat center center;
+  background-size:50%;
+}
+
+a:nth-child(3) {
+  background: url("http://i.imgur.com/hOqtYj1.png") white no-repeat center center;
+  background-size:0%;
+}
+
+a:nth-child(3):hover {
+  background: url("http://i.imgur.com/5DZxCkB.png") white no-repeat center center;
+  background-size:50%;
+}
+
+a:nth-child(2) {
+  background: url("http://imgur.com/jZ8HrKD.png") white no-repeat center center;
+  background-size:0%;
+}
+
+a:nth-child(2):hover {
+  background: url("http://i.imgur.com/7QoxG0X.png") white no-repeat center center;
+  background-size:50%;
+}
+
+a.logo {
+  width: auto;
+  height: auto;
+  position: inherit;
+}
+
+a.logo:after {
+  display:none;
+}
+
+a:after {
+  content: '';
+  color: #fff;
+  position: absolute;
+  width: 4vw;
+  bottom: 0vw;
+  text-align: center;
+  font-size: 0.7vw;
+  text-transform: uppercase;
+  letter-spacing: 0.1vw;
+  opacity: 0;
+  left:0vw;
+  
+          transition: all 100ms ease-in-out;
+  
+          filter: blur(1.5vw) contrast(30);
+}
+
+a:hover:after{
+  opacity:1;
+  bottom: -1.5vw;
+  
+          transition: all 400ms ease-in-out;
+  
+          filter: blur(0vw) contrast(1);
+}
+
+a:first-child:hover:after{
+  content:'contact';
+}
+
+a:nth-child(2):hover:after{
+  content:'Connexion';
+}
+
+a:last-child:hover:after {
+  content:'Inscription';
+}
+
+.menu:hover a:nth-child(2) {
+          transform: translateX(3vw);
+}
+
+.menu:hover a:last-child {
+  
+  
+          transform: translateX(-3vw);
+  
+}
+    </style>
+
+    
+
+
+    
+  </head>
+
+  <body>
+    <div class=font>
+        <div class="image">	
+            <img class="logo" src="/static/jeutennis/img/icone.png" alt="World of Tennis">
+        </div>
+        <div class="title">
+	    <h1>Welcome to World of Tennis !</h1>
+        </div>
+        <div class="menu">
+          <i>
+            <span></span>
+            <span></span>
+            <span></span>
+          </i>
+            <a href="/index/login/"></a>
+            <a href="/index/register/"></a>
+       </div>
+    </div> 
+  </body>
+</html>

@@ -1,0 +1,146 @@
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	        <title>Ion by TEMPLATED</title>
+                <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                <meta name="description" content="" />
+                <meta name="keywords" content="" />
+                <!--[if lte IE 8]><script src="{% static 'jeutennis/js/html5shiv.js' %}"></script><![endif]-->
+                <script src="{% static 'jeutennis/js/jquery.min.js' %}"></script>
+                <script src="{% static 'jeutennis/js/skel.min.js' %}"></script>
+                <script src="{% static 'jeutennis/js/skel-layers.min.js' %}"></script>
+                <script src="{% static 'jeutennis/js/init.js' %}"></script>
+                <noscript>
+                        <link rel="stylesheet" href="{% static 'jeutennis/css/skel.css' %}" />
+                        <link rel="stylesheet" href="{% static 'jeutennis/css/style.css' %}" />
+                        <link rel="stylesheet" href="{% static 'jeutennis/css/style-xlarge.css' %}" />
+                </noscript>
+
+        <script type="text/javascript" src="{% static 'jeutennis/js/date_heure.js' %}"></script>
+    
+    </head>
+    <body id=top>
+		<!-- Header -->
+                        <header id="header" class="skel-layers-fixed">
+                                <h1><a href="#">WOT</a></h1>
+                                <nav id="nav">
+                                        <ul>
+						<li><span id="test"></span>
+					            <script type="text/javascript">window.onload = date_heure('test');</script>
+						</li>
+                                                <li><a href="/index/" class="button special">Home</a></li>
+                                                <li><a href="/index/mp">MP</a></li>
+                                                <li><a href="/index/banque">Banque</a></li>
+                                                <li><a href="/index/charts">Classement</a></li>
+                                                <li><a href="/index/calendar">Calendrier</a></li>
+                                                <li><a href="/index/tournois">Tournois</a></li>
+                                                <li><a href="/index/logout">Quitter</a></li>
+                                        </ul>
+                                </nav>
+                        </header>
+
+</br>
+{% if failmess %}
+<h1 align=center>Vous n'avez plus de vie !</h1>
+<a href=/index/versus/>Retour</a>
+{% else %}
+<h1 align=center>{{ j1 }} contre {{ j2 }}</h1>
+
+				<div class="container">
+                                        <div class="row flush">
+                                                <div class="1u">
+                                                        <section class="special box2">
+                                                                        <div>FRA</div>
+                                                        </section>
+                                                </div>
+                                                <div class="3u">
+                                                        <section class="special box2">
+                                                        		<div>{{ j1 }}</div>
+							</section>
+                                                </div>
+                                                <div class="1u">
+                                                        <section class="special box2">
+									{% for x in s1j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+							</section>
+						</div>
+						<div class="1u">
+							<section class="special box2">
+									{% for x in s2j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+							</section>
+						</div>
+						<div class="1u">
+							<section class="special box2">
+									{% for x in s3j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+							</section>
+						</div>
+						<div class="1u">
+							<section class="special box2">
+									{% for x in s4j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+							</section>
+						</div>
+						<div class="1u">
+							<section class="special box2">		
+									{% for x in s5j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+
+							</section>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="container">
+                                        <div class="row flush">
+                                                <div class="1u">
+                                                        <section class="special box2">
+                                                                        <div>FRA</div>
+                                                        </section>
+                                                </div>
+                                                <div class="3u">
+                                                        <section class="special box2">
+                                                                        <div>{{ j2 }}</div>
+                                                        </section>
+                                                </div>
+                                         	<div class="1u">
+                                                        <section class="special box2">
+                                                                        {% for x in s1j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                        </section>
+                                                </div>
+                                                <div class="1u">
+                                                        <section class="special box2">
+                                                                        {% for x in s2j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                        </section>
+                                                </div>
+                                                <div class="1u">
+                                                        <section class="special box2">
+                                                                        {% for x in s3j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                        </section>
+                                                </div>
+                                                <div class="1u">
+                                                        <section class="special box2">
+                                                                        {% for x in s4j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                        </section>
+                                                </div>
+                                                <div class="1u">
+                                                        <section class="special box2">
+                                                                        {% for x in s5j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+
+                                                        </section>
+                                                </div>        
+                                        
+					</div>
+                                </div>
+
+
+<br>
+<div class="fade-in j{{tour}}"><h3 align=center>Score : {{ set1 }} - {{ set2 }}</h3></div>
+<br>
+<hr>
+<div class="fade-in j{{score}}"><h2 align=center>{{ context2 }}</h2></div>
+<br>
+<div class="fade-in j{{score}}"><h2 align=center>{{ exp }}</h2></div>
+<br>
+<div class="fade-in j{{score}}"><h2 align=center>{{ looter }}</h2></div>
+
+{% endif %}
+    </body>
+</html> 
