@@ -13,7 +13,7 @@
 /* Banner */
 
 	#banner {
-		padding: 8em 0;
+		padding: 1em 0;
 	}
 
 		#banner h2 {
@@ -24,4 +24,11 @@
 
 	#footer {
 		padding: 4em 0;
+	}
+	.pmenu {
+		font-size: 25pt;
+		line-height: 2.8em;
+	}
+	.box1 {
+		line-height: 11;
 	}

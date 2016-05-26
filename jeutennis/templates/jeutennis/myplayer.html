@@ -8,7 +8,7 @@
 -->
 <html>
 	<head>
-		<title>Ion by TEMPLATED</title>
+		<title>World of Tennis</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -22,92 +22,95 @@
 			<link rel="stylesheet" href="{% static 'jeutennis/css/style.css' %}" />
 			<link rel="stylesheet" href="{% static 'jeutennis/css/style-xlarge.css' %}" />		
 		</noscript>
+		<script type="text/javascript" src="{% static 'jeutennis/js/date_heure.js' %}"></script>
+
 	</head>
 	<body id="top">
-
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
 				<h1><a href="/index/">WOT</a></h1>
-				<nav id="nav">
-					<ul>
-						<li><a href="/index/" class="button special">Home</a></li>
-                                                <li><a href="/index/mp">MP</a></li>
-                                                <li><a href="/index/banque">Banque</a></li>
-						<li><a href="/index/charts">Classement</a></li>
-						<li><a href="/index/calendar">Calendrier</a></li>
-						<li><a href="/index/tournois">Tournois</a></li>
-						<li><a href="/index/logout">Quitter</a></li>
-					</ul>
+				<nav class="cl-effect-12" id="nav">
+				    <ul>
+					 <li><a href="/index/">Home</a></li>
+                                         <li><a href="/index/mp">MP</a></li>
+                                         <li><a href="/index/banque">Banque</a></li>
+                                         <li><a href="/index/charts">Classement</a></li>
+                                         <li><a href="/index/calendar">Calendrier</a></li>
+                                         <li><a href="/index/tournois">Tournois</a></li>
+                                         <li><a href="/index/logout">Quitter</a></li>
+
+				    </ul>
 				</nav>
 			</header>
 
 
-			<section id="banner">
-				<div class = "inner">
-                                	<ul class="actions">
-						<h2>Mon Joueur</h2>
-						<p>{{ prenom }} {{ nom }}</p>
-                                    		<li>
-                                        	<form action="." method="post">
-                                        	{% csrf_token %}
-                                        	<button type="submit" value="Night" name="Night" id="Night" class="button big special">Mon profil</button>
-                                        	</form>
-                                    		</li>
-                                		<li><a href="/index/inventaire" class="button big special">Inventaire</a></li>
-					</ul>
-				</div>
-			</section>
-
-
-
-		<!-- One -->
-			<hr>
-			<center>
-			<h3>Niveau {{ niveau }}</h3>
-			<progress max="{{ max_exp }}" value={{ exp }} form="form-id">{{ exp }}</progress>
-			<br>
-			{% if levelup = 0 %}
-			Achevez les objectifs ci-dessous pour monter de niveau !
-			{% else %}
-			<form action="." method="post">
-                        {% csrf_token %}
-                        <button type="submit" value="levelup" name="levelup" id="levelup" class="button big special">Niveau suivant</button>
-                        </form>
-			{% endif %}
-			</center>
-			<hr>			
-			<section id="one" class="wrapper style1">
-				<div class="container">
-					<h3>Objectifs</h3>
-                                	<div class="row">
-						<div>Expérience : {{ exp }}/{{ max_exp }}</div>
-						<div>Matchs gagnés : {{ nvictoire }}</div>
-						<div>Argent : {{ nargent }}</div>	
+                <!-- Banner -->
+                        <section id="banner">
+                                <div class="inner">
+                                        <h2>{{ prenom }} {{ nom }}</h2>
+					<div class="row panel">
+					    <div class="2u boxpanel">Niveau :</div>
+					    <div class="2u boxpanel">Energie :</div>
+					    <div class="2u boxpanel">Classement :</div>
+					    <div class="2u boxpanel">Argent :</div>
 					</div>
-				</div>
-			</section>	
-	
-			<section id="one" class="wrapper style1">
-				<div class="container">
-					<div class="row">
-                                                <div class="4u">
-                                                        <section class="special box">
+                                </div>
+                        </section>
+
+                        <section id="one" class="wrapper style0">
+                                <div class="container">
+                                        <div class="row menucenter">
+                                                <div class="5u box1u"><a class="pmenu" href="/index/myplayer"><div class="boxu">Mon Profil</div></a></div>
+
+						<div class="5u box1u"><a class="pmenu" href="/index/inventaire"><div class="boxu">Inventaire</div></a></div>
+
+                                        </div>
+                                </div>
+                        </section>
+
+                <!-- One -->
+                        <section id="one" class="wrapper style0">
+				    <div class="lvlcenter">
+                        		<h3>Niveau {{ niveau }}</h3>
+					<progress max="{{ max_exp }}" value={{ exp }} form="form-id">{{ exp }}</progress>
+					<br>
+                        		{% if levelup = 0 %}
+                        		Achevez les objectifs ci-dessous pour monter de niveau !  
+                			<h4>Objectifs</h4>
+				              <div class="row">
+                                                <div class="4u">Expérience : {{ exp }}/{{ max_exp }}</div>
+                                                <div class="4u">Matchs gagnés : {{ nvictoire }}</div>
+                                                <div class="4u">Argent : {{ nargent }}</div>
+                                              </div>
+					{% else %}
+                        		<form action="." method="post">
+                        		{% csrf_token %}
+                        		<button type="submit" value="levelup" name="levelup" id="levelup" class="button big special">Niveau suivant</button>
+                        		</form>
+                        		{% endif %}
+				    </div>	
+                        </section>
+  <section id="one" class="wrapper style1">
+                                <div class="container">
+                                        <div class="row menucenter">
+                                                <div class="5u box3u">
+                                                        <section class="special">
                                                                 <h3>Compétences</h3>
                                                                         <div>Service : {{ serv }}</div>
-									<div>Retour : {{ ret }}</div>
-									<div>Concentration : {{ con }}</div>
-									<div>Endurance : {{ endu }}</div>
+                                                                        <div>Retour : {{ ret }}</div>
+                                                                        <div>Concentration : {{ con }}</div>
+                                                                        <div>Endurance : {{ endu }}</div>
                                                         </section>
                                                 </div>
-                                                <div class="4u">
-                                                        <section class="special box">
+                                                <div class="5u box3u">
+                                                        <section class="special">
                                                                 <h3>Carrière</h3>
                                                                         <div>Points : {{ points }}</div>
-									{% if classement = 1 %}
+                                                                        {% if classement = 1 %}
                                                                         <div>Classement : {{ classement }} er</div>
-									{% else %}
-									<div>Classement : {{ classement }} eme</div>
-									{% endif %}
+                                                                        {% else %}
+                                                                        <div>Classement : {{ classement }} eme</div>
+                                                                        {% endif %}
                                                                         <div>Victoires : {{ vict }}</div>
                                                                         <div>Défaites : {{ defaite }}</div>
                                                         </section>
@@ -118,87 +121,22 @@
                         </section>
                         <section id="one" class="wrapper style1">
                                 <div class="container">
-                                        <div class="row">
+                                        <div class="row menucenter">
                                                 <div class="3u">
-                                                        <section class="special box">
+                                                        <section class="special box3u">
                                                                 <h3>Palmarès</h3>
-									{% for x in list_tour %}
+                                                                        {% for x in list_tour %}
                                                                         <div>{{ x }}</div>
-                                                        		{% endfor %}
-							</section>
+                                                                        {% endfor %}
+                                                        </section>
                                                 </div>
                                         </div>
                                 </div>
                         </section>
 
-			
-		<!-- Two -->
-			<section id="two" class="wrapper style2">
-				<header class="major">
-					<h2>Commodo accumsan aliquam</h2>
-					<p>Amet nisi nunc lorem accumsan</p>
-				</header>
-				<div class="container">
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a href="#" class="image fit"><img src="/static/jeutennis/img/pic01.jpg" alt="" /></a>
-								<h3>Mollis adipiscing nisl</h3>
-								<p>Eget mi ac magna cep lobortis faucibus accumsan enim lacinia adipiscing metus urna adipiscing cep commodo id. Ac quis arcu amet. Arcu nascetur lorem adipiscing non faucibus odio nullam arcu lobortis. Aliquet ante feugiat. Turpis aliquet ac posuere volutpat lorem arcu aliquam lorem.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a href="#" class="image fit"><img src="/static/jeutennis/img/pic02.jpg" alt="" /></a>
-								<h3>Neque ornare adipiscing</h3>
-								<p>Eget mi ac magna cep lobortis faucibus accumsan enim lacinia adipiscing metus urna adipiscing cep commodo id. Ac quis arcu amet. Arcu nascetur lorem adipiscing non faucibus odio nullam arcu lobortis. Aliquet ante feugiat. Turpis aliquet ac posuere volutpat lorem arcu aliquam lorem.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>
 
-		<!-- Three -->
-			<section id="three" class="wrapper style1">
-				<div class="container">
-					<div class="row">
-						<div class="8u">
-							<section>
-								<h2>Mollis ut adipiscing</h2>
-								<a href="#" class="image fit"><img src="/static/jeutennis/img/pic03.jpg" alt="" /></a>
-								<p>Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit accumsan sapien blandit ac amet faucibus aliquet placerat commodo. Interdum ante aliquet commodo accumsan vis phasellus adipiscing. Ornare a in lacinia. Vestibulum accumsan ac metus massa tempor. Accumsan in lacinia ornare massa amet. Ac interdum ac non praesent. Cubilia lacinia interdum massa faucibus blandit nullam. Accumsan phasellus nunc integer. Accumsan euismod nunc adipiscing lacinia erat ut sit. Arcu amet. Id massa aliquet arcu accumsan lorem amet accumsan commodo odio cubilia ac eu interdum placerat placerat arcu commodo lobortis adipiscing semper ornare pellentesque.</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section>
-								<h3>Magna massa blandit</h3>
-								<p>Feugiat amet accumsan ante aliquet feugiat accumsan. Ante blandit accumsan eu amet tortor non lorem felis semper. Interdum adipiscing orci feugiat penatibus adipiscing col cubilia lorem ipsum dolor sit amet feugiat consequat.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-							<hr />
-							<section>
-								<h3>Ante sed commodo</h3>
-								<ul class="alt">
-									<li><a href="#">Erat blandit risus vis adipiscing</a></li>
-									<li><a href="#">Tempus ultricies faucibus amet</a></li>
-									<li><a href="#">Arcu commodo non adipiscing quis</a></li>
-									<li><a href="#">Accumsan vis lacinia semper</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>			
-			
-		<!-- Footer -->
+
+		<!--Footer -->
 			<footer id="footer">
 				<div class="container">
 					<div class="row double">

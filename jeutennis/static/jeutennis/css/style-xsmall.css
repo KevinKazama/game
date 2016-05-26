@@ -60,5 +60,17 @@
 /* Banner */
 
 	#banner {
-		padding: 5em 2em 4em 2em;
+		padding: 1em 1em;
 	}
+
+        .menucenter{
+                margin-left: 1.5em;
+        }
+        .pmenu {
+                font-size: 10pt;
+                line-height: 4.5em;
+        }
+        .box1 {
+                line-height: 20;
+        }
+

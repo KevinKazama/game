@@ -46,10 +46,49 @@
 <h1 align=center>Vous n'avez plus de vie !</h1>
 <a href=/index/versus/>Retour</a>
 {% else %}
+                        <section id="one" class="wrapper style1">
+                                <div class="container">
+                                        <div class="row menucenter">
+                                                <div class="5u box3u">
+                                                        <section class="special">
+                                                                <h3>{{ j1 }}</h3>
+                                                                        <div>Points : {{ ptsj1 }}</div>
+                                                                        {% if classj1 = 1 %}
+                                                                        <div>Classement : {{ classj1 }} er</div>
+                                                                        {% else %}
+                                                                        <div>Classement : {{ classj1 }} eme</div>
+                                                                        {% endif %}
+                                                                        <div>Victoires : {{ victj1 }}</div>
+                                                                        <div>Défaites : {{ defj1 }}</div>
+							</section>
+                                                </div>
+                                                <div class="5u box3u">
+                                                        <section class="special">
+                                                                <h3>{{ j2 }}</h3>
+                                                                        <div>Points : {{ ptsj2 }}</div>
+                                                                        {% if classj2 = 1 %}
+                                                                        <div>Classement : {{ classj2 }} er</div>
+                                                                        {% else %}
+                                                                        <div>Classement : {{ classj2 }} eme</div>
+                                                                        {% endif %}
+                                                                        <div>Victoires : {{ victj2 }}</div>
+                                                                        <div>Défaites : {{ defj2 }}</div>
+                                                        </section>
+                                                </div>
+
+                                        </div>
+                                </div>
+                        </section>
+
+
+
+
+
+
 <h1 align=center>{{ j1 }} contre {{ j2 }}</h1>
 
 				<div class="container">
-                                        <div class="row flush">
+                                        <div class="row flush match">
                                                 <div class="1u">
                                                         <section class="special box2">
                                                                         <div>FRA</div>
@@ -60,36 +99,37 @@
                                                         		<div>{{ j1 }}</div>
 							</section>
                                                 </div>
-                                                <div class="1u">
-                                                        <section class="special box2">
-									{% for x in s1j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                <div class="1u umatch">
+							<section class="box2">
+								{% for x in s1j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+
 							</section>
 						</div>
-						<div class="1u">
-							<section class="special box2">
-									{% for x in s2j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+						<div class="1u umatch">
+							<section class="box2">
+								{% for x in s2j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
 							</section>
 						</div>
-						<div class="1u">
-							<section class="special box2">
-									{% for x in s3j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+						<div class="1u umatch">
+							<section class="box2">
+								{% for x in s3j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
 							</section>
 						</div>
-						<div class="1u">
-							<section class="special box2">
-									{% for x in s4j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+						<div class="1u umatch">
+							<section class="box2">
+								{% for x in s4j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
 							</section>
 						</div>
-						<div class="1u">
-							<section class="special box2">		
-									{% for x in s5j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+						<div class="1u umatch">
+							<section class="box2">		
+								{% for x in s5j1 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
 
 							</section>
                                                 </div>
                                         </div>
                                 </div>
                                 <div class="container">
-                                        <div class="row flush">
+                                        <div class="row flush match">
                                                 <div class="1u">
                                                         <section class="special box2">
                                                                         <div>FRA</div>
@@ -100,30 +140,29 @@
                                                                         <div>{{ j2 }}</div>
                                                         </section>
                                                 </div>
-                                         	<div class="1u">
+                                         	<div class="1u umatch">
                                                         <section class="special box2">
-                                                                        {% for x in s1j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+        	                                                {% for x in s1j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
                                                         </section>
                                                 </div>
-                                                <div class="1u">
+                                                <div class="1u umatch">
                                                         <section class="special box2">
-                                                                        {% for x in s2j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                                {% for x in s2j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
                                                         </section>
                                                 </div>
-                                                <div class="1u">
+                                                <div class="1u umatch">
                                                         <section class="special box2">
-                                                                        {% for x in s3j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                                {% for x in s3j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
                                                         </section>
                                                 </div>
-                                                <div class="1u">
+                                                <div class="1u umatch">
                                                         <section class="special box2">
-                                                                        {% for x in s4j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
+                                                                {% for x in s4j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
                                                         </section>
                                                 </div>
-                                                <div class="1u">
+                                                <div class="1u umatch">
                                                         <section class="special box2">
-                                                                        {% for x in s5j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
-
+                                                                {% for x in s5j2 %}<div class="fade-in j{{forloop.counter}}">{{ x }}</div>{% endfor %}
                                                         </section>
                                                 </div>        
                                         

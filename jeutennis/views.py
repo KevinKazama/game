@@ -580,7 +580,20 @@ def match(request):
     con2 = joueur2.concentration + raqconcentration2
     arg1 = joueur1.argent 
     arg2 = joueur2.argent
+    ptsj1 = joueur1.points
+    ptsj2 = joueur2.points
+    victj1 = joueur1.victoire
+    victj2 = joueur2.victoire
+    defj1 = joueur1.defaite
+    defj2 = joueur2.defaite
+    tableauj1 = table_joueurs.objects.filter().exclude(points__lte = ptsj1).annotate(total=Count('points'))
+    classj1 = len(tableauj1) + 1
+    tableauj2 = table_joueurs.objects.filter().exclude(points__lte = ptsj2).annotate(total=Count('points'))
+    classj2 = len(tableauj2) + 1
+
     niv = joueur1.niveau_id
+
+
     diff = 0
     comm = []
     message = []
@@ -826,6 +839,14 @@ def match(request):
                 's4j2' : s4j2,
                 's5j1' : s5j1,
                 's5j2' : s5j2,
+		'ptsj1' : ptsj1,
+		'ptsj2' : ptsj2,
+		'victj1' : victj1,
+		'victj2' : victj2,
+		'defj1' : defj1,
+		'defj2' : defj2,
+		'classj1' : classj1,
+		'classj2' : classj2,
 		'nbtour' : nbtour,
 		'looter' : looter,
 		'exp' : exp,

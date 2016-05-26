@@ -58,16 +58,27 @@
                                 </div>
                         </section>
 
+                        <section id="one" class="wrapper style0">
+                                <div class="container">
+                                        <div class="row menucenter">
+                                                <div class="5u box">
+                                                        <a class="pmenu" href="/index/myplayer"><div class="box4">Mon Joueur</div></a>
+							<a class="pmenu" href="/index/myplayer"><div class="box4">Aventure</div></a>
+							<a class="pmenu" href="/index/detail"><div class="box4">Entrainement</div></a>
+							<a class="pmenu" href="/index/banque"><div class="box4">Banque</div></a>
+                                                </div>
+                                                <div class="5u box"><a class="pmenu" href="/index/versus"><div class="box1">Matchs</div></a></div>
+
+                                        </div>
+                                </div>
+                        </section>
+
+
 		{% else %}
 		 <!-- One -->
                         <section id="one" class="wrapper style0">
                                 <div class="container">
                                         <div class="row menucenter">
-                                                <div class="5u box">
-                                                                <i class="icon fa-area-chart major"></i>
-                                                                <h3>Justo placerat</h3>
-                                                                <p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
-                                                </div>
                                                 <div class="5u box">
                                                                 <i class="icon fa-refresh major"></i>
                                                                 <h3>Se connecter</h3>
@@ -83,34 +94,6 @@
 			</section>
 
 	{% endif %}
-
-                        <section id="one" class="wrapper style0">
-                                <div class="container">
-                                        <div class="row menucenter">
-                                                <div class="5u box">
-							<div class="row menucenter">
-							<div class="2u box3">
-                                                	</div>
-							<div class="2u box3">
-							</div>
-							<div class="2u box3">
-                                                        </div>
-							</div>
-
-						</div>
-                                                <div class="5u box">
-                                                                <i class="icon fa-refresh major"></i>
-                                                                <h3>Se connecter</h3>
-                                                        <form method="post" action=".">
-                                                        {% csrf_token %}
-                                                        {{ form.as_p }}
-                                                        <input type="submit" value="Se connecter" />
-                                                        </form>
-                                                </div>
-
-                                        </div>
-                                </div>
-                        </section>
 
 		<!--Footer -->
 			<footer id="footer">

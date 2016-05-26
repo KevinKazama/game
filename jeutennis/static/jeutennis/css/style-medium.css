@@ -31,7 +31,7 @@
 /* Banner */
 
 	#banner {
-		padding: 6em 1em;
+		padding: 1em 1em;
 	}
 
 		#banner .button {
@@ -113,3 +113,14 @@
 			#navPanel nav .button {
 				width: 100%;
 			}
+        .menucenter{
+                margin-left: 2em;
+        }
+        .pmenu {
+                font-size: 20pt;
+                line-height: 3.7em;
+        }
+        .box1 {
+                line-height: 15;
+        }
+

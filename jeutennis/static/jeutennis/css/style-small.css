@@ -7,7 +7,7 @@
 /* Basic */
 
 	body, input, select, textarea {
-		font-size: 12pt;
+		font-size: 10pt;
 	}
 
 	h2 {
@@ -50,7 +50,7 @@
 /* Banner */
 
 	#banner {
-		padding: 5em 2em 4em 2em;
+		padding: 1em 1em;
 	}
 
 		#banner h2 {
@@ -83,3 +83,14 @@
 				padding-left: 0;
 				display: block;
 			}
+	.menucenter{
+		margin-left: 2em;
+	}
+        .pmenu {
+                font-size: 15pt;
+                line-height: 4em;
+        }
+        .box1 {
+                line-height: 17;
+        }
+

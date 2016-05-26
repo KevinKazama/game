@@ -16,6 +16,8 @@
 		background: no-repeat fixed;
 		background-image: url("/static/jeutennis/img/background.jpg");
 		background-size : cover;
+		width: 100%;
+		height: 100%;
 	}
 
 	body, input, select, textarea {
@@ -27,8 +29,7 @@
 	}
 
 	a {
-		color: #629DD1;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 
 		a:hover {
@@ -46,6 +47,21 @@
 
 	p {
 		margin: 0 0 2em 0;
+	}
+
+	.pmenu {
+		font-size: 30pt;
+                font-weight: 300;
+                line-height: 2.5em;
+                text-shadow: 0.01em 0.01em 0.5em #1400FF;
+		height: 100%;
+	}
+	.pmenu:visited, .pmenu:active {
+		color: #FFFFFF;
+	}
+
+	span {
+		vertical-align: middle;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -186,7 +202,7 @@
 
 	header.major {
 		text-align: center;
-		margin: 0 0 4em 0;
+		margin: 0 0 1em 0;
 	}
 
 		header.major h2 {
@@ -201,7 +217,8 @@
 /* Form */
 
 	form {
-		margin: 0 0 2em 0;
+		margin: 0 0 0 0em;
+		width: 100%;
 	}
 
 	label {
@@ -401,10 +418,9 @@
 	.box {
 		background: rgba(0,0,0,0.3);
 		border-radius: 6px;
-		border: solid 3px rgba(240, 240, 240, 0.35);
-		padding: 3em 0em;
+		padding: 0em 0em;
 		margin-left: 2em;
-		height: 30em;
+		height: 24em;
 	}
 
 		.box > :last-child,
@@ -419,44 +435,83 @@
 			padding: 0;
 		}
 
-	.box:hover {
-		border: solid 3px rgba(0,0,0,0.6);
-		transition-duration: 0.2s;
-		}
+        .boxu:hover {
+                border: solid 0.06em rgba(44,117,255,0.9);
+                transition-duration: 0.2s;
+                }
+
+        .box1:hover {
+                border: solid 0.06em rgba(44,117,255,0.9);
+                transition-duration: 0.2s;
+                }
 	.box2:hover {
-                border: solid 3px rgba(0,0,0,0.6);
+                border: solid 0.06em rgba(44,117,255,0.9);
                 transition-duration: 0.2s;
                 }
 	.box3:hover {
-                border: solid 3px rgba(0,0,0,0.6);
+                border: solid 0.06em rgba(44,117,255,0.9);
                 transition-duration: 0.2s;
                 }
         .box4:hover {
-                border: solid 3px rgba(0,0,0,0.6);
+                border: solid 0.06em rgba(44,117,255,0.9);
+		background: rgba(255,255,255,0.1);
                 transition-duration: 0.2s;
                 }
         .box5:hover {
-                border: solid 3px rgba(0,0,0,0.6);
+                border: solid 0.06em rgba(44,117,255,0.9);
                 transition-duration: 0.2s;
                 }
 
 	.panel {
 		background: rgba(0,0,0,0.3);
                 border-radius: 6px;
-                border: solid 3px rgba(240, 240, 240, 0.35);
+                border: solid 0.07em rgba(44, 117, 255, 0.8);
                 margin-left: 0em;
 		}
 	.menucenter {
-		margin-left: 0em;
-		height: 30em;
+		margin-left: 4em;
+		height: auto;
 		}
-        .box2 {
+        .lvlcenter {
+                height: auto;
+		background: rgba(0, 0, 0, 0.35);
+		border-radius: 6px;
+		border: solid 0.03em rgba(240, 240, 240, 0.35);
+                text-align: center;
+		}
+
+        .box1 {
                 border-radius: 6px;
-                border: solid 3px rgba(240, 240, 240, 0.35);
+                border: solid 0.03em rgba(240, 240, 240, 0.35);
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+		vertical-align: middle;
+		line-height: 10;
+        }
+
+                .box1 > :last-child,
+                .box1 > :last-child > :last-child,
+                .box1 > :last-child > :last-child > :last-child {
+                        margin-bottom: 0;
+                }
+
+                .box1.alt {
+                        border: 0;
+                        border-radius: 0;
+                        padding: 0;
+                }
+	.box2 {
+                border-radius: 6px;
+                border: solid 0.03em rgba(240, 240, 240, 0.35);
                 padding: 0;
                 width: 100%;
 		height: 50%;
-        }
+                text-align: center;
+        	vertical-align: middle;
+                line-height: 5;
+	}
 
                 .box2 > :last-child,
                 .box2 > :last-child > :last-child,
@@ -471,10 +526,13 @@
                 }
         .box3 {
                 border-radius: 6px;
-                border: solid 3px rgba(240, 240, 240, 0.35);
+                border: solid 0.03em rgba(240, 240, 240, 0.35);
                 padding: 0;
                 width: 100%;
                 height: 33.3%;
+		text-align: center;
+                vertical-align: middle;
+                line-height: 3.3;
         }
 
                 .box3 > :last-child,
@@ -492,10 +550,12 @@
 
 	.box4 {
                 border-radius: 6px;
-                border: solid 3px rgba(240, 240, 240, 0.35);
+                border: solid 0.03em rgba(240, 240, 240, 0.35);
                 padding: 0;
 		width: 100%;
 		height: 25%;
+		text-align: center;
+                vertical-align: middle;
 	}
 
 
@@ -511,13 +571,106 @@
                         padding: 0;
                 }
 
+	.boxu {
+	        border-radius: 6px;
+                border: solid 0.03em rgba(240, 240, 240, 0.35);
+                padding: 0;
+                height: 100%;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 30pt;
+		font-weight: 300;
+                line-height: 2.5em;
+                text-shadow: 0.01em 0.01em 0.5em #1400FF;
+
+	}
+                .boxu > :last-child,
+                .boxu > :last-child > :last-child,
+                .boxu > :last-child > :last-child > :last-child {
+                        margin-bottom: 0;
+                }
+
+                .boxu.alt {
+                        border: 0;
+                        border-radius: 0;
+                        padding: 0;
+                }
+
+
+        .box1u {
+                background: rgba(0,0,0,0.3);
+                border-radius: 6px;
+                padding: 0em 0em;
+                margin-left: 2em;
+                height: 6em;
+	}
+
+                .box1u > :last-child,
+                .box1u > :last-child > :last-child,
+                .box1u > :last-child > :last-child > :last-child {
+                        margin-bottom: 0;
+                }
+
+                .box1u.alt {
+                        border: 0;
+                        border-radius: 0;
+                        padding: 0;
+                }
+
+        .box2u {
+                background: rgba(0,0,0,0.3);
+                border-radius: 6px;
+                padding: 0em 0em;
+                margin-left: 2em;
+                height: 12em;
+        }
+
+                .box2u > :last-child,
+                .box2u > :last-child > :last-child,
+                .box2u > :last-child > :last-child > :last-child {
+                        margin-bottom: 0;
+                }
+
+                .box2u.alt {
+                        border: 0;
+                        border-radius: 0;
+                        padding: 0;
+                }
+
+
+        .box3u {
+                background: rgba(0,0,0,0.3);
+                border-radius: 6px;
+                padding: 0em 0em;
+                margin-left: 2em;
+                height: 12em;
+        }
+
+                .box3u > :last-child,
+                .box3u > :last-child > :last-child,
+                .box3u > :last-child > :last-child > :last-child {
+                        margin-bottom: 0;
+                }
+
+                .box3u.alt {
+                        border: 0;
+                        border-radius: 0;
+                        padding: 0;
+                }
+
 
         .boxpanel {
                 border-radius: 6px;
-                border: solid 3px rgba(240, 240, 240, 0.35);
+                border: solid 0.07em rgba(240, 240, 240, 0.35);
                 padding: 0;
                 width: 25%;
         }
+	.match {
+		background : black;
+	}
+	.umatch {
+		padding: 0em 0em 1em 5em;
+	}
 
 /* Icon */
 
@@ -944,12 +1097,12 @@
 /* Wrapper */
 
 	.wrapper {
-		padding: 6em 0 2em 0;
+		padding: 1em 0 1em 0;
 	}
 
                 .wrapper.style0 {
                         color: #fff5f6;
-		        padding: 2em 0 1em 0;
+		        padding: 1em 0 1em 0;
 		}
 
 		.wrapper.style1 {
@@ -1109,7 +1262,7 @@
 			margin: auto;
 			width: 60%;
 			border-radius: 6px;
-			background: rgba(255,255,255,0.8);
+			background: rgba(255,255,255,0);
 		}
 
 			#banner .inner :last-child {
@@ -1242,14 +1395,14 @@
   -moz-animation-delay: 3s;
   animation-delay: 3s;
   z-index: 1;
-  background:white;
+  background: black;
 }
 .fade-in.j3 {
   -webkit-animation-delay: 6s;
   -moz-animation-delay: 6s;
   animation-delay: 6s;
   z-index: 2;
-  background:white;
+  background: black;
 
 }
 .fade-in.j4 {
@@ -1257,21 +1410,21 @@
   -moz-animation-delay: 9s;
   animation-delay: 9s;
   z-index: 3;
-  background:white;
+  background: black;
 }
 .fade-in.j5 {
   -webkit-animation-delay: 12s;
   -moz-animation-delay: 12s;
   animation-delay: 12s;
   z-index: 4;
-  background:white;
+  background: black;
 }
 .fade-in.j6 {
   -webkit-animation-delay: 15s;
   -moz-animation-delay: 15s;
   animation-delay: 15s;
   z-index: 5;
-  background:white;
+  background: black;
 }
 
 .fade-in.j7 {
@@ -1279,105 +1432,105 @@
   -moz-animation-delay: 18s;
   animation-delay: 18s;
   z-index: 6;
-  background:white;
+  background:black;
 }
 .fade-in.j8 {
   -webkit-animation-delay: 21s;
   -moz-animation-delay: 21s;
   animation-delay: 21s;
   z-index: 7;
-  background:white;
+  background:black;
 }
 .fade-in.j9 {
   -webkit-animation-delay: 24s;
   -moz-animation-delay: 24s;
   animation-delay: 24s;
   z-index: 8;
-  background:white;
+  background:black;
 }
 .fade-in.j10 {
   -webkit-animation-delay: 27s;
   -moz-animation-delay: 27s;
   animation-delay: 27s;
   z-index: 9;
-  background:white;
+  background:black;
 }
 .fade-in.j11 {
   -webkit-animation-delay: 30s;
   -moz-animation-delay: 30s;
   animation-delay: 30s;
   z-index: 10;
-  background:white;
+  background:black;
 }
 .fade-in.j12 {
   -webkit-animation-delay: 33s;
   -moz-animation-delay: 33s;
   animation-delay: 33s;
   z-index: 11;
-  background:white;
+  background:black;
 }
 .fade-in.j13 {
   -webkit-animation-delay: 36s;
   -moz-animation-delay: 36s;
   animation-delay: 36s;
   z-index: 12;
-  background:white;
+  background:black;
 }
 .fade-in.j14 {
   -webkit-animation-delay: 39s;
   -moz-animation-delay: 39s;
   animation-delay: 39s;
   z-index: 13;
-  background:white;
+  background:black;
 }
 .fade-in.j15 {
   -webkit-animation-delay: 42s;
   -moz-animation-delay: 42s;
   animation-delay: 42s;
   z-index: 14;
-  background:white;
+  background:black;
 }
 .fade-in.j16 {
   -webkit-animation-delay: 45s;
   -moz-animation-delay: 45s;
   animation-delay: 45s;
   z-index: 15;
-  background:white;
+  background:black;
 }
 .fade-in.j17 {
   -webkit-animation-delay: 48s;
   -moz-animation-delay: 48s;
   animation-delay: 48s;
   z-index: 16;
-  background:white;
+  background:black;
 }
 .fade-in.j18 {
   -webkit-animation-delay: 51s;
   -moz-animation-delay: 51s;
   animation-delay: 51s;
   z-index: 17;
-  background:white;
+  background:black;
 }
 .fade-in.j19 {
   -webkit-animation-delay: 54s;
   -moz-animation-delay: 54s;
   animation-delay: 54s;
   z-index: 18;
-  background:white;
+  background:black;
 }
 .fade-in.j20 {
   -webkit-animation-delay: 57s;
   -moz-animation-delay: 57s;
   animation-delay: 57s;
   z-index: 19;
-  background:white;
+  background:black;
 }
 .fade-in.j21 {
   -webkit-animation-delay: 60s;
   -moz-animation-delay: 60s;
   animation-delay: 60s;
   z-index: 20;
-  background:white;
+  background:black;
 }
 
 .fade-in.j22 {
@@ -1385,21 +1538,21 @@
   -moz-animation-delay: 63s;
   animation-delay: 63s;
   z-index: 21;
-  background:white;
+  background:black;
 }
 .fade-in.j23 {
   -webkit-animation-delay: 66s;
   -moz-animation-delay: 66s;
   animation-delay: 66s;
   z-index: 22;
-  background:white;
+  background:black;
 }
 .fade-in.j24 {
   -webkit-animation-delay: 69s;
   -moz-animation-delay: 69s;
   animation-delay: 69s;
   z-index: 23;
-  background:white;
+  background:black;
 }
 .fade-in.j25 {
   -webkit-animation-delay: 72s;
