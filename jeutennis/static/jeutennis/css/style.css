@@ -219,6 +219,7 @@
 	form {
 		margin: 0 0 0 0em;
 		width: 100%;
+		height : 100%;
 	}
 
 	label {
@@ -462,6 +463,15 @@
                 transition-duration: 0.2s;
                 }
 
+	.boxeffect {
+                background: rgba(0,0,0,0.9);
+                border-radius: 6px;
+                padding: 0em 1em;
+                margin-left: 2em;
+		padding-bottom : 1em;
+                height: auto;
+        }
+
 	.panel {
 		background: rgba(0,0,0,0.3);
                 border-radius: 6px;
@@ -666,12 +676,24 @@
                 width: 25%;
         }
 	.match {
-		background : black;
+		background : rgba(0,0,0,0.9);
+	}
+	.matchcont {
+		margin-left : auto;
+		margin-right : auto;
+		width: 700px;
 	}
 	.umatch {
 		padding: 0em 0em 1em 5em;
 	}
 
+	.show {
+		display : block;
+	}
+	.hide {
+		display : none;
+	}
+	
 /* Icon */
 
 	.icon {
@@ -1094,6 +1116,19 @@
 			opacity: 0.25;
 		}
 
+		.showraq {
+			width: 100%;
+			height: 100%;
+			background: none;
+			padding : 0em 0em 0em 0em;
+			border : 0em;
+			color : #FFFFFF;
+		        font-size: 14pt;
+	                font-weight: 300;
+        	        line-height: 1.75em;
+
+		}
+
 /* Wrapper */
 
 	.wrapper {
@@ -1395,36 +1430,35 @@
   -moz-animation-delay: 3s;
   animation-delay: 3s;
   z-index: 1;
-  background: black;
+  background: rgba(0,0,0,0.9);
 }
 .fade-in.j3 {
   -webkit-animation-delay: 6s;
   -moz-animation-delay: 6s;
   animation-delay: 6s;
   z-index: 2;
-  background: black;
-
+  background: rgba(0,0,0,0.9);
 }
 .fade-in.j4 {
   -webkit-animation-delay: 9s;
   -moz-animation-delay: 9s;
   animation-delay: 9s;
   z-index: 3;
-  background: black;
+  background: rgba(0,0,0,0.9);
 }
 .fade-in.j5 {
   -webkit-animation-delay: 12s;
   -moz-animation-delay: 12s;
   animation-delay: 12s;
   z-index: 4;
-  background: black;
+  background: rgba(0,0,0,0.9);
 }
 .fade-in.j6 {
   -webkit-animation-delay: 15s;
   -moz-animation-delay: 15s;
   animation-delay: 15s;
   z-index: 5;
-  background: black;
+  background: rgba(0,0,0,0.9);
 }
 
 .fade-in.j7 {

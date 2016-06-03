@@ -32,7 +32,7 @@
 				<h1><a href="/index/">WOT</a></h1>
 				<nav class="cl-effect-12" id="nav">
 				    <ul>
-					 <li><a href="/index/">Home</a></li>
+					 <li><a href="/index/login">Home</a></li>
                                          <li><a href="/index/mp">MP</a></li>
                                          <li><a href="/index/banque">Banque</a></li>
                                          <li><a href="/index/charts">Classement</a></li>
@@ -50,10 +50,10 @@
                                 <div class="inner">
                                         <h2>{{ user.username }}</h2>
 					<div class="row panel">
-					    <div class="2u boxpanel">Niveau :</div>
-					    <div class="2u boxpanel">Energie :</div>
-					    <div class="2u boxpanel">Classement :</div>
-					    <div class="2u boxpanel">Argent :</div>
+					    <div class="2u boxpanel">Niveau : {{ niveau }}</div>
+					    <div class="2u boxpanel">Energie : {{ energie }}</div>
+					    <div class="2u boxpanel">Classement : {{ classement }}</div>
+					    <div class="2u boxpanel">Argent : {{ argent }}</div>
 					</div>
                                 </div>
                         </section>
@@ -67,7 +67,7 @@
 							<a class="pmenu" href="/index/detail"><div class="box4">Entrainement</div></a>
 							<a class="pmenu" href="/index/banque"><div class="box4">Banque</div></a>
                                                 </div>
-                                                <div class="5u box"><a class="pmenu" href="/index/versus"><div class="box1">Matchs</div></a></div>
+                                                <div class="5u box"><a class="pmenu" href="/index/matchmenu"><div class="box1">Matchs</div></a></div>
 
                                         </div>
                                 </div>

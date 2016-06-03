@@ -14,6 +14,7 @@ urlpatterns = [
         url(r'^results/$', views.results, name='results'),
         url(r'^versus/$', views.versus, name='versus'),
         url(r'^match/$', views.match, name='match'),
+        url(r'^matchmenu/$', views.matchmenu, name='matchmenu'),
 #	url(r'^match/(?P<match_id>[0-9]+)/$', views.resmatch, name='resmatch'),
 	url(r'^register/$', views.register, name='register'),
 	url(r'^register_success/$', views.register_success, name='register_success'),

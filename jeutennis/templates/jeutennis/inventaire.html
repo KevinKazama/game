@@ -17,6 +17,14 @@
 		<script src="{% static 'jeutennis/js/skel.min.js' %}"></script>
 		<script src="{% static 'jeutennis/js/skel-layers.min.js' %}"></script>
 		<script src="{% static 'jeutennis/js/init.js' %}"></script>
+		<script type="text/javascript">
+			function showStuff(raq, chauss, maillot) {
+				document.getElementById(raq).style.display = 'block';
+				document.getElementById(chauss).style.display = 'block';
+				document.getElementById(maillot).style.display = 'block';
+			}
+		</script>
+                        
 		<noscript>
 			<link rel="stylesheet" href="{% static 'jeutennis/css/skel.css' %}" />
 			<link rel="stylesheet" href="{% static 'jeutennis/css/style.css' %}" />
@@ -63,8 +71,7 @@
 
                                         </div>
                                         <div class="row menucenter">
-                                                <div class="5u box1u"><div class="boxu">Raquette</div></a></div>
-
+                                                <div class="5u box1u"><button id="showraq" class="showraq" onclick="showStuff('raquette', 'test1', 'test2')"><div class="boxu">Raquette</div></button></a></div>
 
                                         </div>
 
@@ -77,7 +84,7 @@
 		<!-- One -->
 			<section id="one" class="wrapper style1">
 				<div class="container">
-					<div class="row">
+					<div class="row" id="raquette" style="display : none;">
 						{% for id,teq,d,serv,ret,con,end,pr,nivreq in ziplist %}
                                                 <div class="3u">
                                                         <section class="special box">

@@ -64,22 +64,47 @@ def login(request, template_name='jeutennis/connexion.html',
             # Okay, security check complete. Log the user in.
             auth_login(request, form.get_user())
             username = form.cleaned_data['username']
-	    u = User.objects.get(username=username)
-	    m = table_joueurs.objects.get(user_id=u)
+	    u = User.objects.get(username=request.user.username)
+	    m = table_joueurs.objects.get(user_id=u.id)
+	    test = m.prenom
+	    niveau = m.niveau_id
 	    	    
-	    context = RequestContext(request, {'m' : m}) 
+	    context = RequestContext(request, {
+	        'test' : test,
+	        'niveau' : niveau,
+	        'm' : m,
+	    }) 
             return HttpResponseRedirect(redirect_to)
-	    return render(request, 'jeutennis/connexion.html', context)
+	    #return render(request, 'jeutennis/connexion.html', context)
     else:
         form = authentication_form(request)
     current_site = get_current_site(request)
 
-    context = {
-        'form': form,
-        redirect_field_name: redirect_to,
-        'site': current_site,
-        'site_name': current_site.name,
-    }
+    try:
+	user = User.objects.get(username=request.user.username)
+        joueur = table_joueurs.objects.get(user_id = user.id)
+        niveau = joueur.niveau_id
+        energie = joueur.vie
+        pts = joueur.points
+        tableau = table_joueurs.objects.filter().exclude(points__lte = pts).annotate(total=Count('points'))
+        classement = len(tableau) + 1
+        argent = joueur.argent
+
+        context = RequestContext(request, {
+                'niveau' : niveau,
+                'energie' : energie,
+                'classement' : classement,
+                'argent' : argent,
+            })
+        return render(request, 'jeutennis/connexion.html', context)
+    except:
+
+        context = {
+            'form': form,
+            redirect_field_name: redirect_to,
+            'site': current_site,
+            'site_name': current_site.name,
+        }
     if extra_context is not None:
         context.update(extra_context)
 
@@ -1622,3 +1647,23 @@ def train_session(request):
 			'argent' : argent,
 			})
     		    return render(request, 'jeutennis/train_session.html', context)
+
+@login_required
+def matchmenu(request):
+    user = User.objects.get(username=request.user.username)
+    joueur = table_joueurs.objects.get(user_id = user.id)
+    niveau = joueur.niveau_id
+    energie = joueur.vie
+    argent = joueur.argent
+    pts = joueur.points
+    tableau = table_joueurs.objects.filter().exclude(points__lte = pts).annotate(total=Count('points'))
+    classement = len(tableau) + 1
+
+    context = RequestContext(request, {
+	'niveau' : niveau,
+	'energie' : energie,
+	'argent' : argent,
+	'classement' : classement,
+	})
+	
+    return render(request, 'jeutennis/matchmenu.html', context)
